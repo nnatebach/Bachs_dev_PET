@@ -5,4 +5,4 @@ This is the repo for all my PET projects on my JavaScript learning journey
 
 Reference: https://anjana.dev/javascript-first-steps/
 
-[ ] 01. JavaScript Quiz project
+[x] 01. JavaScript Quiz project - Wednesday, February 4th, 2026
