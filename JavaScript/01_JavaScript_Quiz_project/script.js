@@ -31,39 +31,34 @@ function enable(button) {
 // TODO 5: Declare an isCorrect function that compares a guess to the right answer
 function isCorrect(guess) {
   // isCorrect(guess) should return true if the guess matches the fact's answer
-  if (guess === fact.answer) {
-    return true
-  }
-  return false
+  return guess === fact.answer
 }
 
 
 // TODO 6A: Use a for loop to add a click event listener to each of the optionButtons
-for (let i = 0; i < optionButtons.length; i++) {
-  optionButtons[i].addEventListener("click", function () {
-    // console.log(optionButtons[i].value);
+for (let option of optionButtons) {
+  option.addEventListener("click", event => {
 
     // TODO 6B: Within the event handler function, display the fact's explanation by setting the text of the explanation element
     explanation.textContent = fact.explanation;
 
     // TODO 7: Within the event handler function,
     // Use a for loop to disable all the option buttons
-    for (let i = 0; i < optionButtons.length; i++) {
-      disable(optionButtons[i]);
+    for (let button of optionButtons) {
+      disable(button);
     }
     // TODO 8: Within the event handler function,
     // Get the guessed value from the clicked button
-    const guessedValue = optionButtons[i].value;
-    console.log(guessedValue);
+    const guessedValue = event.target.value;
 
     // Use a conditional to compare the guess to the fact's answer
     if (isCorrect(guessedValue)) {
       // and add the "correct"/"incorrect" class as appropriate
       // TODO if correct answer
-      optionButtons[i].classList.add("correct")
+      event.target.classList.add("correct")
     } else {
       // TODO if incorrect answer
-      optionButtons[i].classList.add("incorrect");
+      event.target.classList.add("incorrect");
     }
   })
 }
