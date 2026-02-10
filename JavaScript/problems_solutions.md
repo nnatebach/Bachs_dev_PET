@@ -155,6 +155,14 @@ This markdown file is meant for all problems encountered during the learning jou
 
 - Reason: It is because their values are considered as incorrect according to the "Iscorrect" function
 
+	``` js
+	function isCorrect(guess) {
+		if (guess === fact.answer) return true
+	}
+	```
+
 - Solution: Make sure the data types are the same between the values of the button and the value of the property in the object that you are comparing it to
 
-	In this case, since the value of the buttons are strings "true" and "false", the value of the property in the object should also be strings
+	In this case, since the value of the buttons are strings "true" and "false"
+	`<button name="true" value="true">true</button>`
+	the value of the property in the object should also be strings
