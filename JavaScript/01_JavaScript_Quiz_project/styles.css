@@ -52,3 +52,15 @@ button {
 .incorrect {
     background-color: lightpink;
 }
+
+#next {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+#score {
+    text-align: center;
+}
