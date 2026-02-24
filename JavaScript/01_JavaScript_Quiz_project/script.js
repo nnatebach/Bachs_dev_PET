@@ -38,11 +38,6 @@ const facts = [
   },
 ];
 
-// TODO 3: Set the text of the statement element to the fact's statement
-for (let fact of facts) {
-  statement.textContent = fact.statement;
-}
-
 // TODO 4: Declare disable & enable functions to set or remove the "disabled" attribute from a given button element
 // disable(button) should set the button element's attribute "disabled" to the value ""
 function disable (button) {
@@ -75,7 +70,7 @@ function getNextFact() {
 
   // Hide any previous explanation
   hide(explanation)
-  
+
   for (let option of optionButtons) {
     // Remove all the styles for the buttons
     option.classList.remove("correct")
