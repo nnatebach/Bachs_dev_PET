@@ -97,7 +97,7 @@ for (let option of optionButtons) {
     if (facts.length > 0) {
       enable(next)
     } else {
-      next.textContent = "There is no more questions!"
+      next.textContent = "There are no more questions!"
     }
 
     // TODO 8: Within the event handler function,
