@@ -6,3 +6,4 @@ This is the repo for all my PET projects on my JavaScript learning journey
 Reference: https://anjana.dev/javascript-first-steps/
 
 [x] 01. JavaScript Quiz project - Wednesday, February 4th, 2026
+[ ] 02. JavaScript Doggos Quiz Game - Monday, March 2nd, 2026
