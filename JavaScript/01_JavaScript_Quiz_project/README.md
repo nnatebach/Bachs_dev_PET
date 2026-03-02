@@ -4,7 +4,7 @@ JavaScript Quiz Project
 		- Quiz statement
 		- True and False buttons for the user to interact with
 		- Explanation about why the statement is True / False
-	
+
 	- The logic
 		- The *fact* object has 3 properties
 			- statement: string
@@ -23,7 +23,7 @@ JavaScript Quiz Project
 		- Explanation about why the statement is True / False
 	- The logic
 		- The *facts* is now an *array* of objects, each object has the 3 properties like before
-		
+
 			``` js
 			const facts = [
 				{
@@ -33,7 +33,7 @@ JavaScript Quiz Project
 				}
 			]
 			```
-	
+
 		- The *statement*s are displayed by shortening the array *facts* with the *shift()* method which removes the first element of the array and returns that removed element so we can access it
 			``` js
 			fact = facts.shift()
