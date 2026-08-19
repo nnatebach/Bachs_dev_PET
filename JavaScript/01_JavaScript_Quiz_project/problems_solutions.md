@@ -258,11 +258,28 @@ In this case it is the *next* DOM element. It is declared and assigned to a vari
     - The Comparison is mismatched: When you are on Question 1, isCorrect looks at Question 2 (the new first item in the array). When you are on Question 2, it looks at Question 3. It is always checking your guess against the next answer, not the current one.
 - Solution: Do not use a loop for *isCorrect*!
 
+---
+
+12
+
+- Problem:
+  `script.js:5 Uncaught TypeError: Cannot read properties of null (reading 'children')`
+- Reason: `<script>` is placed inside `<head>`
+  ``` html
+	<head>
+    <meta charset="utf-8">
+    <title>Quiz.js</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js"></script>
+  </head>
+	```
+- Solution: Move `<script>` down to just before `</body>`
+
 ===
 
 **Bonus**
 
-12
+13
 
 - Problem: If I don't call the function `getNextFact()` at the end of the program, the last element of **facts** array is going to show up with the `statement`
 ``` js

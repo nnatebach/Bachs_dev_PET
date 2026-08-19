@@ -30,6 +30,69 @@ This markdown file is meant for all questions encountered during the learning jo
 - Answer: There is **no functional difference**. It is generally better for **logic flow** and **visual feedback**
 
 ---
+
+03
+
+- Question: Why do we use `querySelector` instead of `getElementById` for `options` even though it's an `id` name?
+- Answer: The `<div id="options">` includes of two buttons which means it is a plural element. Therefore, we use `querySelector` to represent the plural form of the `options` element.
+
+---
+
+04
+
+- Question: Do we need to enclose Object properties in quotes / double quotes?
+- Answer: Object properties are seen as Strings in JavaScript so it is a good practice to enclose them in quotes / double quotes
+- Example:
+  ``` js
+  const fact = {
+    statement: "Arrays are like objects",
+    answer: true,
+    explanation: "Arrays are a kind of objects with special properties"
+  };
+  ```
+  You can access the value of property `statement` by 2 ways
+  - `fact.statement` => "Arrays are like objects"
+  - `fact["statement"]` => "Arrays are like objects"
+
+---
+
+05
+
+- Question: What is a *parameter* / *argument* of a function
+- Answer: A function may need one or more than one *parameter(s)* to work. Then the actual value(s) passed to the parameter(s) are called the *argument(s)*
+- Example:
+  ``` js
+  function add (x, y) {
+    return x + y;
+  }
+
+  add(2, 3)
+  ```
+  - The function `add` needs the *parameters* x and y to work
+  - 2 and 3 are the actual values that are passed into the function `add` as the *arguments*
+
+---
+
+06
+
+- Question: What happens if we don't call a function with the intended arguments?
+- Example: The function `add3` would expect to have 3 parameters and to be called with 3 arguments. What happens if we call `add3` with only 2 arguments, say `add3(1,2)`?
+- Answer: It will return `undefined` as the third value
+
+---
+
+07
+
+- Question: How to know whether a function returns something or it logs out something?
+- Answer: When a function logs out something with `console.log()`, it also goes with *undefined*
+
+---
+
+08
+
+- Question: `setAttribute("disabled", "false")` will not make the button work, to be clickable, again. Why?
+- Answer: JS only cares about whether the *disabled* attribute exists on the button, it does not care the *value* of that *attribute*
+
 ---
 
 ## Bonus

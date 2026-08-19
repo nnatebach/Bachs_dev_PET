@@ -46,3 +46,130 @@ JavaScript Quiz Project
 			- if the *guess* is incorrect, the button turns *orange*
 			- the user can now click on the *next button* to navigate to the next *statement*
 		- As soon as there is no more *statement*, the text of the *next question* button will change to "There are no more questions!"
+- Notes:
+  - *Parameters* should be named like *variables*, and *behave* like variables within the function body.
+  - *NaN* is something you might find if things have gone wrong in your program.
+  - Some functions don't even need any values (`Math.random()`)
+  - Every function in JavaScript returns something. However, if you don't specify what value it should return then *undefine* is the default return value.
+  - JavaScript stops running your code inside of the function body once it hits that *return* statement
+		``` js
+		function returnAndLogsquare (x) {
+			return x*x;
+			console.log(x*x)
+		}
+		```
+		`unreachable code after return statement`
+		``` js
+		const attempt = returnAndLogsquare (3) // undefined
+		returnAndLogsquare (3) // 9
+		attempt // 9
+		```
+		This is valid JavaScript, it's not throwing an error
+		=> The *return* statement exits the function
+	- There are two ways of defining a function
+  	- Function declaration
+			``` js
+			function multiply () {
+				...
+			}
+			```
+		- Function expression = function assignment + anonymous function
+			``` js
+			const yell = function () {
+				...
+			}
+			```
+	- For comparing between two strings (things) that return the values of `true` or `false`, we can either
+  	- Use `if...else` then `return`
+			``` js
+			function longerThan (s1, s2) {
+				if (s1.length > s2.length) {
+					return true;
+				} else {
+					return false
+				}
+			}
+			```
+  	- Name the function as *longerThan* or *shorterThan* and then `return`
+			``` js
+			function isLongerThan2 (s1, s2) {
+				return s1.length > s2.length
+			}
+
+			isLongerThan2 ("jumper", "high") // true
+			```
+	- Parentheses are
+  	- Optional for one-parameter functions
+			Instead of `(x) => x*x` go for `x => x*x`
+		- Required for multiple parameters
+			`(firstName, lastName) => firstName + " " + lastName`
+	- If we need to do more than just return a value, we can use curly braces for a "normal" function body.
+  In that case, we still need a `return`
+		``` js
+		const addAndLog = (x, y) => {
+			let sum = x + y;
+			console.log("The sum is ", sum);
+			return sum;
+		}
+		```
+	- Referencing the assigned variable instead of repeating yourself many times.
+		Example: Write an application that does both *console.log* and *returning* a value
+		``` js
+		const whisper3 = text => {
+			const lc = text.toLowerCase()
+			console.log(lc)
+			return lc
+		}
+
+		let result3 = whisper("OMG") // the function logs out "omg", return "undefined" as the value
+		result3 // omg
+		```
+	- To disable a button, make it unclickable
+		``` js
+		setAttribute(qualifiedName, value)
+		```
+		To make it work again
+		``` js
+		removeAttribute(attrName)
+		```
+	- For the *TODO 4* specifically we are trying to pass in a DOM element (a button) rather than picking one from the DOM.
+  Hence, the function is
+		``` js
+		function disable (button) {
+			button.setAttribute("disabled", "")
+		}
+		```
+	- Transforming a function declaration to an arrow function
+		From this
+		``` js
+		function disable (button) {
+			button.setAttribute("disabled", "")
+		}
+		```
+		To this
+		``` js
+		const isDisabled = button => button.setAttribute("disabled", "")
+		```
+	- We often need to `return` a value when it comes to comparing two or more things together.
+	Common patterns are
+    - Boolean comparisons (the most common case)
+			``` js
+			return a === b;  // without `return`, the caller gets `undefined`
+			```
+		- Sort comparator functions
+			``` js
+			numbers.sort((a, b) => a - b); // ascending
+			```
+		- Ternaries / conditional logic that produce a value
+			``` js
+			function bigger(a, b) {
+				return a > b ? a : b;
+			}
+			```
+		- Equality checks used in conditionals
+			``` js
+			if (a === b) {
+				console.log("equal");
+			}
+			```
+	- We can convert almost anything in JavaScript with `toString()`
