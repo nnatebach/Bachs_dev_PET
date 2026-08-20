@@ -28,7 +28,7 @@ const isEnabled = button => button.removeAttribute("disabled")
 // isCorrect(guess) should return true if the guess matches the fact's answer
 // We want to call the function on a guess. We're comparing a given guess to the correct answer
 function isCorrect(guess) {
-  return guess === fact.answer
+  return guess === fact.answer.toString()
 }
 
 // TODO 6A: Use a for loop to add a click event listener to each of the optionButtons

@@ -95,6 +95,28 @@ This markdown file is meant for all questions encountered during the learning jo
 
 ---
 
+09
+
+- Question: How do we force a local variable to exist outside in the global scope? (It's possible with *let*, yet dangerous)
+- Answer: We can reassign a variable to a new value with *let*
+  ``` js
+  let feeling = "free"
+
+  function trap () {
+    feeling = "boxedIn"
+  }
+
+  trap(); // undefined
+  console.log(feeling); // boxedIn
+  ```
+  That's why we're able to run this function
+  ``` js
+  function isCorrect(guess) {
+    return guess === fact.answer.toString()
+  }
+  ```
+  *fact* is an object in the global scope
+
 ## Bonus
 
 01

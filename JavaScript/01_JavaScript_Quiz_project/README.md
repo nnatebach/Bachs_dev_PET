@@ -173,3 +173,30 @@ JavaScript Quiz Project
 			}
 			```
 	- We can convert almost anything in JavaScript with `toString()`
+		We also need to add that function when comparing between the given *guess* and the *answer* from the *fact* object
+		``` js
+		function isCorrect(guess) {
+			return guess === fact.answer.toString()
+		}
+		```
+		We need to compare two values of the same type
+		The reason is that the original value from *fact* is a *boolean* while the value of the user's guess is *string*
+		``` js
+		const fact = {
+			"statement": "Arrays are like objects",
+			"answer": true,
+			"explanation": "Arrays are a kind of objects with special properties"
+		};
+		```
+	- The value of a variable in the *global scope* can be accessed from within the *function scope*, but it doesn't work the other way around for global variables.
+		``` js
+		let globalVariable = "I live in global scope";
+
+		function narrowerScope () {
+			console.log(globalVariable);
+			let localVariable = "I live in the function scope";
+		}
+
+		narrowerScope(); // I live in global scope
+		console.log(localVariable); // Uncaught ReferenceError: localVariable is not defined
+		```
