@@ -200,3 +200,47 @@ JavaScript Quiz Project
 		narrowerScope(); // I live in global scope
 		console.log(localVariable); // Uncaught ReferenceError: localVariable is not defined
 		```
+	<!-- - var vs let
+		- *function* scope
+  		- var
+				``` js
+				var newVariable = "hello";
+
+				function messWith () {
+					newVariable = "goodbye";
+				}
+
+				newVariable; // hello
+				messWith(); // undefined
+				newVariable; // goodbye
+				```
+			- let
+				``` js
+				let newVariable = "hello";
+
+				function messWith () {
+					newVariable = "goodbye";
+				}
+
+				newVariable; // hello
+				messWith(); // undefined
+				newVariable; // goodbye
+				```
+		- *block* scope
+  		- var
+				``` js
+				var newVariable = "original";
+
+				function messWith () {
+						{
+							var newVariable = "messed";
+						}
+				}
+
+				newVariable; // original
+				messWith(); // undefined
+				newVariable; // original
+				``` -->
+	- An `addEventListener()` takes 2 parameters
+  	- The name of the event to listen to (e.g. "click")
+  	- A *handler* function that JS calls when that event is fired on the element.
