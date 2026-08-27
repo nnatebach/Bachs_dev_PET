@@ -354,3 +354,58 @@ JavaScript Quiz Project
 			```js
 			let mood = forecast === "sunny" ? "happy" : "sad";
 			```
+	- Loops: Log out the array indices `const numbers = [1,2,3]`
+  	- Traditional `for`. This iterates over the *indices* in the array for the value of each index
+			```js
+			const numbers = [1,2,3]
+
+			for (let i = 0; i < numbers.length; i++) {
+				console.log(numbers[i])
+			}
+			```
+			```js
+			1
+			2
+			3
+			```
+  	- `for...of` iterates over...
+    	- The array *items* and then get them out
+      	- Example 1
+					```js
+					const numbers = [1,2,3]
+
+					for (let i of numbers) {
+						console.log(i)
+					}
+					```
+					```js
+					1
+					2
+					3
+					```
+				- Example 2
+					```js
+					for (let item of ["pop", 6, "squish"]) {
+						console.log(typeof(item))
+					}
+					```
+					```js
+					string
+					number
+					string
+					```
+			- The characters in a string
+				```js
+				for (let char of "ALOHA") {
+					console.log(char)
+				}
+				```
+				```js
+				A
+				L
+				O
+				H
+				A
+				```
+	> [!TIP]
+	> In JavaScript, strings and arrays are *iterable*
