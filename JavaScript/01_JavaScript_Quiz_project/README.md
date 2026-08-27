@@ -296,3 +296,46 @@ JavaScript Quiz Project
 
 			// zero is falsy
 			```
+	- Conditionals Exercise:
+  	- Empty arrays are truthy
+			```js
+			if ([]) {
+				console.log("Empty arrays are truthy")
+			} else {
+				console.log("Empty arrays are falsy")
+			}
+			```
+			> Empty arrays are truthy
+  	- Empty strings are falsy
+			```js
+			if ("") {
+				console.log("Empty strings are truthy")
+			} else {
+				console.log("Empty strings are falsy")
+			}
+			```
+			> Empty strings are falsy
+		- *null* is falsy
+			```js
+			if (null) {
+				console.log("null is truthy")
+			} else {
+				console.log("null is falsy")
+			}
+			```
+			> null is falsy
+		- *undefined* is falsy
+			```js
+			if (undefined) {
+				console.log("undefined is truthy")
+			} else {
+				console.log("undefined is falsy")
+			}
+			```
+			> undefined is falsy
+		> [!TIP]
+		> In JavaScript
+		> Nothingness is usually falsy
+		> Somethingness is usually truthy (objects and arrays)
+		> Strings are immutable, an empty string is never going to have stuff in it, this can simply explain why an empty string is falsy
+		> We can push stuff into an empty array, which is why an empty array is truthy
