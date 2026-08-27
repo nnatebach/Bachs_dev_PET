@@ -339,3 +339,18 @@ JavaScript Quiz Project
 		> Somethingness is usually truthy (objects and arrays)
 		> Strings are immutable, an empty string is never going to have stuff in it, this can simply explain why an empty string is falsy
 		> We can push stuff into an empty array, which is why an empty array is truthy
+	- Logical & Ternary Operators
+  	- Using `if...else`
+			```js
+			let mood;
+
+			if (forecast === "sunny") {
+				mood = "happy"
+			} else {
+				mood = "sad"
+			}
+			```
+		- Using *ternary*
+			```js
+			let mood = forecast === "sunny" ? "happy" : "sad";
+			```
