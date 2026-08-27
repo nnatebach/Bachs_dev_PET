@@ -117,6 +117,31 @@ This markdown file is meant for all questions encountered during the learning jo
   ```
   *fact* is an object in the global scope
 
+---
+
+10
+- Question: What is the role of *event* in event listener?
+  ```js
+  document.addEventListener("click", (event) => {
+    console.log(event)
+  })
+  ```
+- Answer: ......
+
+---
+
+11
+- Question: Is there a way that we can directly accessing the DOM element or we would always have to go for the index 0 `document.getElementsByTagName("h1")[0]`
+- Answer: No
+
+---
+
+12
+- Question: Why `console.log(x, " is greater than ", b)` works but `console.log(x " is greater than " b)` does not?
+- Answer
+
+===
+
 ## Bonus
 
 01

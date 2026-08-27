@@ -244,3 +244,55 @@ JavaScript Quiz Project
 	- An `addEventListener()` takes 2 parameters
   	- The name of the event to listen to (e.g. "click")
   	- A *handler* function that JS calls when that event is fired on the element.
+	- Event object
+  	- Click event
+      - using `function` keyword
+				``` js
+				document.addEventListener("click", function () {
+					console.log("Click!")
+				})
+				```
+			- using fat arrow function
+				``` js
+				document.addEventListener("click", () => {
+					console.log("click!")
+				})
+				```
+		- Pass in an parameter to get information from *click* event
+			``` js
+			document.addEventListener("click", (event) => {
+				console.log(event)
+			})
+			```
+			*clientX* and *clientY* shows the location of the pointer where the user clicked on the page.
+			Check out more at [Mouse events](https://developer.mozilla.org/en-US/docs/Web/API/Element#mouse_events)
+		- In order to see which DOM element was clicked
+			``` js
+			document.addEventListener("click", (event) => {
+				console.log(event.target)
+			})
+			```
+  - The *condition* is usually an expression that evaluates to a *boolean*
+		```js
+		if (forecast === "rain") {
+			console.log("bring an umbrella");
+		}
+		```
+		- If it's given some other value, JS will convert it to a boolean
+			and decide based on its "truthiness"
+			- Example 1
+			``` js
+			if ("nonempty strings are truthy") {
+				console.log("This line will run")
+			}
+			```
+			- Example 2
+			``` js
+			if (0) {
+				console.log("zero is truthy")
+			} else {
+				console.log("zero is falsy")
+			}
+
+			// zero is falsy
+			```
