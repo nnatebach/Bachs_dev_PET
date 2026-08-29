@@ -409,6 +409,7 @@ JavaScript Quiz Project
 				```
 	> [!TIP]
 	> In JavaScript, strings and arrays are *iterable*
+
 	> [!IMPORTANT]
 	> The procedures of the traditional `for` loop are
 	> 1. Check condition: i < numbers.length — if false, the loop stops entirely
