@@ -273,31 +273,31 @@ JavaScript Quiz Project
 			})
 			```
   - The *condition* is usually an expression that evaluates to a *boolean*
-		```js
-		if (forecast === "rain") {
-			console.log("bring an umbrella");
+	```js
+	if (forecast === "rain") {
+		console.log("bring an umbrella");
+	}
+	```
+- If it's given some other value, JS will convert it to a boolean
+	and decide based on its "truthiness"
+	- Example 1
+		``` js
+		if ("nonempty strings are truthy") {
+			console.log("This line will run")
 		}
 		```
-		- If it's given some other value, JS will convert it to a boolean
-			and decide based on its "truthiness"
-			- Example 1
-			``` js
-			if ("nonempty strings are truthy") {
-				console.log("This line will run")
-			}
-			```
-			- Example 2
-			``` js
-			if (0) {
-				console.log("zero is truthy")
-			} else {
-				console.log("zero is falsy")
-			}
+	- Example 2
+		``` js
+		if (0) {
+			console.log("zero is truthy")
+		} else {
+			console.log("zero is falsy")
+		}
 
-			// zero is falsy
-			```
+		// zero is falsy
+		```
 	- Conditionals Exercise:
-  	- Empty arrays are truthy
+    	- Empty arrays
 			```js
 			if ([]) {
 				console.log("Empty arrays are truthy")
@@ -306,16 +306,16 @@ JavaScript Quiz Project
 			}
 			```
 			> Empty arrays are truthy
-  	- Empty strings are falsy
-			```js
-			if ("") {
-				console.log("Empty strings are truthy")
-			} else {
-				console.log("Empty strings are falsy")
-			}
-			```
-			> Empty strings are falsy
-		- *null* is falsy
+    	- Empty strings
+  			```js
+  			if ("") {
+  				console.log("Empty strings are truthy")
+  			} else {
+  				console.log("Empty strings are falsy")
+  			}
+  			```
+  			> Empty strings are falsy
+		- *null* is *falsy*
 			```js
 			if (null) {
 				console.log("null is truthy")
@@ -323,8 +323,7 @@ JavaScript Quiz Project
 				console.log("null is falsy")
 			}
 			```
-			> null is falsy
-		- *undefined* is falsy
+		- *undefined* is *falsy*
 			```js
 			if (undefined) {
 				console.log("undefined is truthy")
@@ -332,7 +331,6 @@ JavaScript Quiz Project
 				console.log("undefined is falsy")
 			}
 			```
-			> undefined is falsy
 		> [!TIP]
 		> In JavaScript
 		> Nothingness is usually falsy
@@ -340,20 +338,20 @@ JavaScript Quiz Project
 		> Strings are immutable, an empty string is never going to have stuff in it, this can simply explain why an empty string is falsy
 		> We can push stuff into an empty array, which is why an empty array is truthy
 	- Logical & Ternary Operators
-  	- Using `if...else`
-			```js
-			let mood;
+    	- Using `if...else`
+  			```js
+  			let mood;
 
-			if (forecast === "sunny") {
-				mood = "happy"
-			} else {
-				mood = "sad"
-			}
-			```
-		- Using *ternary*
-			```js
-			let mood = forecast === "sunny" ? "happy" : "sad";
-			```
+  			if (forecast === "sunny") {
+  				mood = "happy"
+  			} else {
+  				mood = "sad"
+  			}
+  			```
+  		- Using *ternary*
+  			```js
+  			let mood = forecast === "sunny" ? "happy" : "sad";
+  			```
 	- Loops: Log out the array indices `const numbers = [1,2,3]`
     	- Traditional `for`. This iterates over the *indices* in the array for the value of each index
 			```js
@@ -370,43 +368,43 @@ JavaScript Quiz Project
 			```
   	- `for...of` iterates over...
     	- The array *items* and then get them out
-      	- Example 1
-					```js
-					const numbers = [1,2,3]
-
-					for (let i of numbers) {
-						console.log(i)
-					}
-					```
-					```js
-					1
-					2
-					3
-					```
-				- Example 2
-					```js
-					for (let item of ["pop", 6, "squish"]) {
-						console.log(typeof(item))
-					}
-					```
-					```js
-					string
-					number
-					string
-					```
-			- The characters in a string
+        	- Example 1
 				```js
-				for (let char of "ALOHA") {
-					console.log(char)
+				const numbers = [1,2,3]
+
+				for (let i of numbers) {
+					console.log(i)
 				}
 				```
 				```js
-				A
-				L
-				O
-				H
-				A
+				1
+				2
+				3
 				```
+      		- Example 2
+				```js
+				for (let item of ["pop", 6, "squish"]) {
+					console.log(typeof(item))
+				}
+				```
+				```js
+				string
+				number
+				string
+				```
+    	- The characters in a string
+    		```js
+    		for (let char of "ALOHA") {
+    			console.log(char)
+    		}
+    		```
+    		```js
+    		A
+    		L
+    		O
+    		H
+    		A
+    		```
 	> [!TIP]
 	> In JavaScript, strings and arrays are *iterable*
 
