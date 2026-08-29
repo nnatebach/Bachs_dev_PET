@@ -355,7 +355,7 @@ JavaScript Quiz Project
 			let mood = forecast === "sunny" ? "happy" : "sad";
 			```
 	- Loops: Log out the array indices `const numbers = [1,2,3]`
-  	- Traditional `for`. This iterates over the *indices* in the array for the value of each index
+    	- Traditional `for`. This iterates over the *indices* in the array for the value of each index
 			```js
 			const numbers = [1,2,3]
 
@@ -409,3 +409,10 @@ JavaScript Quiz Project
 				```
 	> [!TIP]
 	> In JavaScript, strings and arrays are *iterable*
+	> [!IMPORTANT]
+	> The procedures of the traditional `for` loop are
+	> 1. Check condition: i < numbers.length — if false, the loop stops entirely
+	> 2. Run body: `console.log(numbers[i])`
+	> 3. Update: i += 1
+	> 4. Back to step 1
+	> So, the function logs out the index before incrementing it by 1
