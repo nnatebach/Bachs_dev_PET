@@ -138,7 +138,58 @@ This markdown file is meant for all questions encountered during the learning jo
 
 12
 - Question: Why `console.log(x, " is greater than ", b)` works but `console.log(x " is greater than " b)` does not?
-- Answer
+- Answer: ....
+
+---
+
+13
+- Question: In this code, what is the difference between using `button` versus `event.target` in *TODO 8* ? They give the same result
+  ```js
+  // optionButtons should be all the elements within the "options" div
+  const optionButtons = document.querySelector("#options").children;
+
+  // TODO 6A: Use a for loop to add a click event listener to each of the optionButtons
+  for (let button of optionButtons) {
+    button.addEventListener("click", (event) => {
+      // TODO 6B: Within the event handler function, display the fact's explanation by setting the text of the explanation element
+      explanation.textContent = fact.explanation;
+      // TODO 7: Within the event handler function,
+      // Use a for loop to disable all the option buttons
+      for (let otherButton of optionButtons) {
+        isDisabled(otherButton);
+      }
+      // TODO 8: Within the event handler function,
+      // Get the guessed value from the clicked button
+      // Use a conditional to compare the guess to the fact's answer
+      // and add the "correct"/"incorrect" class as appropriate
+      console.log(event.target.value);
+      if (isCorrect(event.target.value)) {
+        event.target.classList.add("correct")
+      } else {
+        event.target.classList.add("incorrect")
+      }
+    })
+  }
+  ```
+  This is the DOM
+  ```html
+  <div id="options">
+      <button name="true" value="true" >true</button>
+      <button name="false" value="false" >false</button>
+  </div>
+  ```
+- Answer: In this case with the specific DOM, both `event.target.value` and `button` refer to that same `<button>` element since there is no other nested element between the button but the button itself
+  ```html
+  <button></button>
+  ```
+  However, using `button` is the safer option here because if there were nested element(s) within the button tags
+  ```html
+  <button value="true">
+      <span>True</span>
+  </button>
+  ```
+  In that case, if you click the `<span>` then `button` is still `<button value="true">...</button>` but `event.target` could be `<span>True</span>`.
+  So, `button.value` would be true while `event.target.value` would be `undefined`, because `<span>` doesn't have a `value` property.
 
 ===
 
