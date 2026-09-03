@@ -191,6 +191,33 @@ This markdown file is meant for all questions encountered during the learning jo
   In that case, if you click the `<span>` then `button` is still `<button value="true">...</button>` but `event.target` could be `<span>True</span>`.
   So, `button.value` would be true while `event.target.value` would be `undefined`, because `<span>` doesn't have a `value` property.
 
+---
+
+14
+- Question: I have these two buttons
+  ```html
+  <div id="options">
+      <button name="true" value="true" >true</button>
+      <button name="false" value="false" >false</button>
+  </div>
+  ```
+  When I click on one of them, I want both of them to be disabled.
+  I'm having two loops for that purpose
+  ```js
+  for (let button of optionButtons) {
+    button.addEventListener("click", () => {
+      // TODO 6B: Within the event handler function, display the fact's explanation by setting the text of the explanation element
+      explanation.textContent = fact.explanation
+      // TODO 7: Within the event handler function,
+      // Use a for loop to disable all the option buttons
+      for (let otherButton of optionButtons) {
+        isDisabled(otherButton);
+      }
+    })
+  }
+  ```
+  Is there any other option where I'd just need one loop?
+
 ===
 
 ## Bonus

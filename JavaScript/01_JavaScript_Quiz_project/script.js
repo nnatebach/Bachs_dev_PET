@@ -33,7 +33,7 @@ function isCorrect(guessString) {
 
 // TODO 6A: Use a for loop to add a click event listener to each of the optionButtons
 for (let button of optionButtons) {
-  button.addEventListener("click", (event) => {
+  button.addEventListener("click", () => {
     // TODO 6B: Within the event handler function, display the fact's explanation by setting the text of the explanation element
     explanation.textContent = fact.explanation;
     // TODO 7: Within the event handler function,
@@ -44,9 +44,8 @@ for (let button of optionButtons) {
     // TODO 8: Within the event handler function,
     // Get the guessed value from the clicked button
     // Use a conditional to compare the guess to the fact's answer
-    // and add the "correct"/"incorrect" class as appropriate
-    console.log(button.value);
     if (isCorrect(button.value)) {
+      // and add the "correct"/"incorrect" class as appropriate
       button.classList.add("correct")
     } else {
       button.classList.add("incorrect")
