@@ -52,20 +52,21 @@ JavaScript Quiz Project
   - Some functions don't even need any values (`Math.random()`)
   - Every function in JavaScript returns something. However, if you don't specify what value it should return then *undefine* is the default return value.
   - JavaScript stops running your code inside of the function body once it hits that *return* statement
-		``` js
-		function returnAndLogsquare (x) {
-			return x*x;
-			console.log(x*x)
-		}
-		```
-		`unreachable code after return statement`
-		``` js
-		const attempt = returnAndLogsquare (3) // undefined
-		returnAndLogsquare (3) // 9
-		attempt // 9
-		```
-		This is valid JavaScript, it's not throwing an error
-		=> The *return* statement exits the function
+	``` js
+	function returnAndLogsquare (x) {
+		return x*x;
+		console.log(x*x)
+	}
+	```
+	> unreachable code after return statement
+	``` js
+	const attempt = returnAndLogsquare (3) // undefined
+	returnAndLogsquare (3) // 9
+	attempt // 9
+	```
+	> [!NOTE]
+	> This is valid JavaScript, it's not throwing an error
+	> => The *return* statement exits the function
 	- There are two ways of defining a function
   	- Function declaration
 			``` js
@@ -405,13 +406,74 @@ JavaScript Quiz Project
     		H
     		A
     		```
-	> [!TIP]
-	> In JavaScript, strings and arrays are *iterable*
+		> [!TIP]
+		> In JavaScript, strings and arrays are *iterable*
 
-	> [!IMPORTANT]
-	> The procedures of the traditional `for` loop are
-	> 1. Check condition: i < numbers.length — if false, the loop stops entirely
-	> 2. Run body: `console.log(numbers[i])`
-	> 3. Update: i += 1
-	> 4. Back to step 1
-	> So, the function logs out the index before incrementing it by 1
+		> [!IMPORTANT]
+		> The procedures of the traditional `for` loop are
+		> 1. Check condition: i < numbers.length — if false, the loop stops entirely
+		> 2. Run body: `console.log(numbers[i])`
+		> 3. Update: i += 1
+		> 4. Back to step 1
+		> So, the function logs out the index before incrementing it by 1
+	- `map` calls a function on *each item* in an array to create a new array
+		- Original array `spices`
+			```js
+			const spices = [
+				{name: "Emma", nickname: "Baby"},
+				{name: "Geri", nickname: "Ginger"},
+				{name: "Mel B", nickname: "Scary"},
+				{name: "Mel C", nickname: "Sporty"},
+				{name: "Victoria", nickname: "Posh"}
+			];
+			```
+			```js
+			const nickname = spices.map(s => s.nickname + " Spice")
+			```
+		- New array `nickname`
+			```js
+			['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
+			```
+		- The original array `spices` remains unchanged
+			```js
+			{name: 'Emma', nickname: 'Baby'}
+			{name: 'Geri', nickname: 'Ginger'}
+			{name: 'Mel B', nickname: 'Scary'}
+			{name: 'Mel C', nickname: 'Sporty'}
+			{name: 'Victoria', nickname: 'Posh'}
+			```
+  - There are two ways of inserting different variables inside a string [string interpolation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+    - Option 1: Using the plus (+) sign as in [Concatenation operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators#string_operators)
+		```js
+		const nickname = spices.map(s => s.nickname + " Spice")
+		```
+    - Option 2: Using backtick
+      - Example 1:
+			```js
+			The sum of 1 and 2 is ${1+2}
+			```
+			> 'The sum of 1 and 2 is 3'
+	    - Example 2: Applying for `nickname` function
+			```js
+			const nickname = spices.map(s => `${s.nickname} Spice`)
+			```
+			> ['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
+	- `filter` calls a true/false function on *each item* and creates a new array with only the items where the function returns *true*
+      - Original array `spices`
+		```js
+		const spices = [
+			{name: "Emma", nickname: "Baby"},
+			{name: "Geri", nickname: "Ginger"},
+			{name: "Mel B", nickname: "Scary"},
+			{name: "Mel C", nickname: "Sporty"},
+			{name: "Victoria", nickname: "Posh"}
+		];
+		```
+		```js
+		const mels = spices.filter(s => s.name.includes("Mel"))
+		```
+      - New array `mels`
+		```js
+		{name: 'Mel B', nickname: 'Scary'}
+		{name: 'Mel C', nickname: 'Sporty'}
+		```

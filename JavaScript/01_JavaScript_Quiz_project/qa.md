@@ -217,6 +217,16 @@ This markdown file is meant for all questions encountered during the learning jo
   }
   ```
   Is there any other option where I'd just need one loop?
+- Answer: ...
+
+---
+
+15
+- Question: How can I change this `map` arrow function to a function expression or a function declaration?
+  ```js
+  const nickname = spices.map(s => s.nickname + " Spice")
+  ```
+- Answer: ...
 
 ===
 
