@@ -449,15 +449,13 @@ JavaScript Quiz Project
 		```
     - Option 2: Using backtick
       - Example 1:
-			```js
-			The sum of 1 and 2 is ${1+2}
-			```
-			> 'The sum of 1 and 2 is 3'
-	    - Example 2: Applying for `nickname` function
-			```js
-			const nickname = spices.map(s => `${s.nickname} Spice`)
-			```
-			> ['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
+			`The sum of 1 and 2 is ${1+2}`
+		> 'The sum of 1 and 2 is 3'
+      - Example 2: Applying for `nickname` function
+		```js
+		const nickname = spices.map(s => `${s.nickname} Spice`)
+		```
+		> ['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
 	- `filter` calls a true/false function on *each item* and creates a new array with only the items where the function returns *true*
       - Original array `spices`
 		```js
