@@ -416,8 +416,49 @@ JavaScript Quiz Project
 		> 3. Update: i += 1
 		> 4. Back to step 1
 		> So, the function logs out the index before incrementing it by 1
-	- `map` calls a function on *each item* in an array to create a new array
-		- Original array `spices`
+	- `map` and `filter`
+  	- `map` calls a function on *each item* in an array to create a new array.
+  		- Original array `spices`
+  			```js
+  			const spices = [
+  				{name: "Emma", nickname: "Baby"},
+  				{name: "Geri", nickname: "Ginger"},
+  				{name: "Mel B", nickname: "Scary"},
+  				{name: "Mel C", nickname: "Sporty"},
+  				{name: "Victoria", nickname: "Posh"}
+  			];
+  			```
+  			```js
+  			const nickname = spices.map(s => s.nickname + " Spice")
+  			```
+  		- New array `nickname`
+  			```js
+  			['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
+  			```
+  		- The original array `spices` remains unchanged
+  			```js
+  			{name: 'Emma', nickname: 'Baby'}
+  			{name: 'Geri', nickname: 'Ginger'}
+  			{name: 'Mel B', nickname: 'Scary'}
+  			{name: 'Mel C', nickname: 'Sporty'}
+  			{name: 'Victoria', nickname: 'Posh'}
+  			```
+    - There are two ways of inserting different variables inside a string [string interpolation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+      - Option 1: Using the plus (+) sign as in [Concatenation operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators#string_operators)
+  		```js
+  		const nickname = spices.map(s => s.nickname + " Spice")
+  		```
+      - Option 2: Using backtick
+        - Example 1:
+  			`The sum of 1 and 2 is ${1+2}`
+  		> 'The sum of 1 and 2 is 3'
+        - Example 2: Applying for `nickname` function
+  		```js
+  		const nickname = spices.map(s => `${s.nickname} Spice`)
+  		```
+  		> ['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
+  	- `filter` calls a true/false function on *each item* and creates a new array with only the items where the function returns *true*
+        - Original array `spices`
 			```js
 			const spices = [
 				{name: "Emma", nickname: "Baby"},
@@ -428,50 +469,72 @@ JavaScript Quiz Project
 			];
 			```
 			```js
-			const nickname = spices.map(s => s.nickname + " Spice")
+			const mels = spices.filter(s => s.name.includes("Mel"))
 			```
-		- New array `nickname`
+      - New array `mels`
 			```js
-			['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
-			```
-		- The original array `spices` remains unchanged
-			```js
-			{name: 'Emma', nickname: 'Baby'}
-			{name: 'Geri', nickname: 'Ginger'}
 			{name: 'Mel B', nickname: 'Scary'}
 			{name: 'Mel C', nickname: 'Sporty'}
-			{name: 'Victoria', nickname: 'Posh'}
 			```
-  - There are two ways of inserting different variables inside a string [string interpolation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
-    - Option 1: Using the plus (+) sign as in [Concatenation operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators#string_operators)
-		```js
-		const nickname = spices.map(s => s.nickname + " Spice")
-		```
-    - Option 2: Using backtick
-      - Example 1:
-			`The sum of 1 and 2 is ${1+2}`
-		> 'The sum of 1 and 2 is 3'
-      - Example 2: Applying for `nickname` function
-		```js
-		const nickname = spices.map(s => `${s.nickname} Spice`)
-		```
-		> ['Baby Spice', 'Ginger Spice', 'Scary Spice', 'Sporty Spice', 'Posh Spice']
-	- `filter` calls a true/false function on *each item* and creates a new array with only the items where the function returns *true*
-      - Original array `spices`
-		```js
-		const spices = [
-			{name: "Emma", nickname: "Baby"},
-			{name: "Geri", nickname: "Ginger"},
-			{name: "Mel B", nickname: "Scary"},
-			{name: "Mel C", nickname: "Sporty"},
-			{name: "Victoria", nickname: "Posh"}
-		];
-		```
-		```js
-		const mels = spices.filter(s => s.name.includes("Mel"))
-		```
-      - New array `mels`
-		```js
-		{name: 'Mel B', nickname: 'Scary'}
-		{name: 'Mel C', nickname: 'Sporty'}
-		```
+		- Exercise:
+			Given the array *spices*
+			- Create a new array *names* with only the name of each girl
+				```js
+				const names = spices.map(s => s.name)
+				```
+				new array *names*
+				```js
+				['Emma', 'Geri', 'Mel B', 'Mel C', 'Victoria']
+				```
+			- Create a new array *endInY* with just the girls whose nickname ends in "y"
+            - Solution 1: Using [`endsWith()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)
+
+				```js
+				const endInY = spices.filter(s => s.nickname.endsWith("y"))
+				```
+    		  - Solution 2: Using `length`
+					```js
+					const complicatedY = spices.filter(s => s.nickname[s.nickname.length - 1] === "y")
+					```
+  				- Result:
+  				```js
+  				{name: 'Emma', nickname: 'Baby'}
+  				{name: 'Mel B', nickname: 'Scary'}
+  				{name: 'Mel C', nickname: 'Sporty'}
+  				```
+		> [!NOTE]
+		> The map() method creates a *new array* populated with the results of calling a provided function on every element in the calling array.
+		> The filter() method creates a *shallow copy* of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+		> Visually, they look exactly the same.
+	- Spread
+    	- We use it to put all the items from one array inside another array
+    		```js
+    		const oldBurns = ["square", "wack"]
+    		const newBurns = ["basic", "dusty", "sus"]
+    		const burnBook = [...oldBurns, ...newBurns];
+    		```
+			equivalent to
+    		```js
+    		const burnBook = oldBurns.concat(newBurns);
+    		```
+			Result:
+    		> ['square', 'wack', 'basic', 'dusty', 'sus']
+		- We can also use it to pass all the items from an array as arguments to a function or method
+			```js
+			const skills = ["HTML", "CSS", "JS"];
+			const newSkills = ["React", "TypeScript", "Node"];
+			skills.push(...newSkills);
+			```
+			```js
+			skills
+			```
+			> ['HTML', 'CSS', 'JS', 'React', 'TypeScript', 'Node']
+			```js
+			console.log(...skills);
+			```
+			> HTML CSS JS React TypeScript Node
+
+		> [!NOTE]
+		> `push()` modifies (*mutates*) the original array and returns the new length
+		> `concat()` creates a *new array* without changing the original one
+		> We can use `spread` to get all the elements out of the array instead of putting it through a `for` loop
