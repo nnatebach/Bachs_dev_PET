@@ -535,6 +535,29 @@ JavaScript Quiz Project
 			> HTML CSS JS React TypeScript Node
 
 		> [!NOTE]
-		> `push()` modifies (*mutates*) the original array and returns the new length
-		> `concat()` creates a *new array* without changing the original one
-		> We can use `spread` to get all the elements out of the array instead of putting it through a `for` loop
+		> `push()` modifies (*mutates*) the original array and returns the new length.
+		> `concat()` creates a *new array* without changing the original one.
+		> We can use `spread` to get all the elements out of the array instead of putting it through a `for` loop.
+
+		> [!NOTE]
+		> `console.log(array)`: You are passing *one object* (the array itself). Depending on your terminal or browser console, it often formats arrays vertically with dropdown arrows so you can inspect the indices and properties easily.
+		> `console.log(...array)`: The spread operator *unpacks* the array into *separate arguments* before passing them to the function. It is the exact equivalent of writing console.log(item1, item2, item3). By default, console.log prints multiple arguments side-by-side on a single line, separated by a space.
+
+		> Examples
+		> ```js
+		> const fruits = ['🍎', '🍌', '🍇'];
+		>
+		> // 1. Passing the array as a single object
+		> console.log(fruits); 
+		> /* Output often looks like:
+		> [
+		>   '🍎',
+		>   '🍌',
+		>   '🍇'
+		> ]
+		> */
+		>
+		> // 2. Spreading the array into individual arguments
+		> console.log(...fruits); 
+		> // Output: 🍎 🍌 🍇
+		> ```
