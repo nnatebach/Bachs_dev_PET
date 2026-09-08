@@ -9,6 +9,7 @@
 - Play with doggos!
 
 ## Content
+
 ### while loops
 
 ```js
@@ -102,6 +103,33 @@ while (fiveRandomNumbers.length < 5) {
       ['string', 'object']
       ['object', 'undefined']
       ```
+
+### setTimeout - Asynchronous JavaScript
+- Reference: [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS/Introducing)
+- JS can only do one task at a time ("single-threaded")
+- We use Asynchronous JavaScript for tasks that take time
+  - Waiting for user events
+  - Asking a user to pick a file
+  - Getting permission to access the camera/mic
+  - Loading data from the interwebs
+- Example:
+  ```js
+  console.log("This will print first");
+  setTimeout(() => console.log("This will print third"), 1000);
+  console.log("This will print second");
+  ```
+  ```js
+  This will print first
+  This will print second
+  undefined
+  This will print third
+  ```
+  > [!NOTE]
+  > After the third `console.log` ran, the browser returned `undefined` as there's no returned value, the second `console.log` printed out `This will print third` after the `1000` milliseconds.
+- Optional homework to research:
+  - Video: [What the heck is the event loop anyway? | Philip Roberts | JSConf EU](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+  - Transcript: https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html
+- LinkedIn post: https://www.linkedin.com/posts/arnaudbregere_what-the-heck-is-the-event-loop-anyway-activity-7421837919641882624-KJjY/
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
