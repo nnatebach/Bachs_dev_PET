@@ -131,6 +131,40 @@ while (fiveRandomNumbers.length < 5) {
   - Transcript: https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html
 - LinkedIn post: https://www.linkedin.com/posts/arnaudbregere_what-the-heck-is-the-event-loop-anyway-activity-7421837919641882624-KJjY/
 
+### APIs & fetch
+- APIs
+  - URLs point to certain resources on the web that are not only images and webpages but also data and information.
+  - APIs provide URLs that point at data we care about
+    `https://dog.ceo/api/breed/hound/list`
+    ```js
+    {
+      "message": [
+        "afghan",
+        "basset",
+        "blood",
+        "english",
+        "ibizan",
+        "plott",
+        "walker"
+      ],
+      "status": "success"
+    }
+    ```
+    __dog ceo__ gives a list of all the types of __hound breeds__
+  - `dog.ceo/api/breed/hound/list` is often called an endpoint of an API, which is a URL within the API, that gives a particular resource.
+  - Real-world analogy: if the Dog API is a giant restaurant, the URL you provided is a specific line item on the menu ("List of Hound Breeds"). Looking at that line item connects you to the kitchen (the server), which then brings you the exact dish you ordered (the JSON data).
+  - Here is a breakdown of how to correctly classify and describe that link:
+    - "This URL is an API endpoint." — This is the most technically accurate phrasing. An endpoint is a specific digital location where an API receives requests.
+    - "This is a web API request URL." — This explains that the URL is the vehicle used to communicate with the API.
+    - "This URL returns an API response." — This highlights that the result of visiting the URL is structured data (`JSON`) meant for computers, rather than a styled webpage (`HTML`) meant for human eyes.
+
+  > [!IMPORTANT]
+  > URLs are **not** a subset of APIs. Instead, they are two completely distinct technologies that happen to overlap when we build systems for the internet.
+
+- `fetch` lets us JS to load data from APIs
+  `fetch("https://dog.ceo/api/breed/hound/list")`
+
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
