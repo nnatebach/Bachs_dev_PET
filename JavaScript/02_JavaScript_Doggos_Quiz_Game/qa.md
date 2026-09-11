@@ -77,3 +77,130 @@ Is it because of the requirements or is it because of the assignment `const bree
   }
   ```
 - Answer: That's because the TODO's requirement is to __return a list__ (an array) of choices. Since the function needs to build up and eventually return an array, you need some array to accumulate values into as you go (pushing the correct answer first, then random candidates).
+
+---
+
+06.
+- Question: Other than `fetch` that returns a Promise, how to tell if an operation / function returns a Promise? What are the signs to look for?
+- Answer: In JavaScript, there are several strong clues that a function/operation is Promise-based, but there isn't a universal rule you can determine just by looking at the function name.
+  1. Look at the return value<br>
+  The most reliable runtime test is:
+      ```js
+        const result = someFunction();
+
+        result instanceof Promise
+      ```
+      or, more generally
+      ```js
+      result?.then
+      ```
+      Example:
+      ```js
+      const result = fetch("/api/data");
+
+      console.log(result instanceof Promise); // true
+      ```
+      You can also use
+      ```js
+      Promise.resolve(result) === result
+      ```
+  2. Look for `async`<br>
+  If a function is declared with async, it always returns a Promise, even if you return an ordinary value:
+      ```js
+      async function foo() {
+        return 42;
+      }
+
+      const result = foo();
+
+      console.log(result); // Promise
+      ```
+      Conceptually:
+      ```js
+      async function foo() {
+        return 42;
+      }
+      ```
+      behaves roughly like:
+      ```js
+      function foo() {
+        return Promise.resolve(42);
+      }
+      ```
+      So `async` is one of the clearest signs.
+  3. Look for `return new Promise(...)`<br>
+    Obviously:
+      ```js
+      function foo() {
+        return new Promise((resolve, reject) => {
+          // ...
+        });
+      }
+      ```
+      returns a Promise.
+
+      You may also encounter:
+      ```js
+      function foo() {
+        return Promise.resolve(something);
+      }
+      ```
+      or:
+      ```js
+      function foo() {
+        return Promise.reject(error);
+      }
+      ```
+      These are also obvious signs.
+
+  4. Look at how the function is used
+      This is often the easiest clue when reading someone else's code.<br>
+      If you see:
+      ```js
+      const data = await getData();
+      ```
+      then `getData()` is expected to return something awaitable—normally a Promise.
+
+      Likewise:
+      ```js
+      getData()
+        .then(data => {
+          ...
+        })
+        .catch(error => {
+          ...
+        });
+      ```
+      strongly indicates a Promise.
+
+      For example:
+      ```js
+      const response = fetch(url);
+
+      response.then(...)
+      ```
+      `fetch()` is Promise-based because its returned object has `.then()`.
+  5. APIs often explicitly document it<br>
+    For built-in/browser APIs, check the return type in the documentation.<br>
+    For example:
+      ```js
+      fetch(url)
+      ```
+      > `Promise<Response>`
+
+      Whereas:
+      ```js
+      document.getElementById("foo")
+      ```
+      > `Element | null`
+
+      So it isn't Promise-based.<br>
+      Modern JavaScript documentation often shows something like:
+      ```js
+      Returns: Promise<...>
+      ```
+      or, in TypeScript:
+      ```js
+      function getUser(): Promise<User>
+      ```
+      That's the most authoritative way to know.

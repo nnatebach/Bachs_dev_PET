@@ -164,6 +164,36 @@ while (fiveRandomNumbers.length < 5) {
 - `fetch` lets us JS to load data from APIs
   `fetch("https://dog.ceo/api/breed/hound/list")`
 
+### Working with Promises
+- Promises
+  - For working with operations that take a long time like `fetch` (get the data from the dog API)
+  - It takes time to `fetch` data from the network
+    ```js
+    >> fetch("https://dog.ceo/api/breed/hound/list")
+    Promise { <state>: "pending" }
+    ```
+    - JS writes us an "IOU" - "I Owe You", for the actual data (value) of the thing we're looking for because it doesn't have it yet.
+      > [!NOTE]
+      > Having a Promise of a value
+    - Promises can be in 3 possible states:
+      - `pending`: still *waiting* for the value, hang tight
+      - `fulfilled` (aka "`resolved`"): finally _got the value_, all done
+      - `rejected`: sorry _couldn't get_ the value, all done.
+
+    > [!NOTE]
+    > Promise lets us represent a value that we don't have yet
+
+    > [!TIP]
+    > A Promise can either be _still in the works_, `pending`, or _finished_.<br>
+    > What we want usually is for the Promise to be fulfilled with the value we want.
+
+    > [!IMPORTANT]
+    > Promises are also asynchronous since it takes time for Promises to resolve.<br>
+    > There are other cases of Promise for long running processes as well. Fetch is one example of an operation or a function that returns a Promise.
+
+- `await`
+  - JS doesn't want to stop and wait for the _hound list_ data from `fetch` before running through the rest of the code. JS will add the task to the list, go get us the value, yet in the meantime also keeps running our program.
+  - We can use `await` to tell JS to __stop__ and __wait__ for an asynchronous operation to finish.
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
