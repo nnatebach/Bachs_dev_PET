@@ -195,6 +195,36 @@ while (fiveRandomNumbers.length < 5) {
   - JS doesn't want to stop and wait for the _hound list_ data from `fetch` before running through the rest of the code. JS will add the task to the list, go get us the value, yet in the meantime also keeps running our program.
   - We can use `await` to tell JS to __stop__ and __wait__ for an asynchronous operation to finish.
 
+### Using Await with Promises
+- Promise with and without `await`
+  - WithOUT `await`
+    ```js
+    let response1 = fetch("https://dog.ceo/api/breed/hound/list");
+    console.log(response1);
+    Promise {<pending>}
+    ```
+  - With `await`
+    ```js
+    let response = await fetch("https://dog.ceo/api/breed/hound/list");
+    console.log(response);
+    Response {type: 'cors', url: 'https://dog.ceo/api/breed/hound/list', redirected: false, status: 200, ok: true, …}
+    ```
+    > [!NOTE]
+    > In the case of `await`, JS is going to wait for the Promise to be resolved to the value that JS is giving us an IOU **before** it goes on and continues running our program.<br>
+    > Without `await`, JS will give back the *pending* Promise and continue running the rest of the program.
+  - For the Response `body` that says `body: ReadableStream`. We can call the `.json()` method to parse its body as a JSON object. And yet, that gives us another Promise that we can ask JS to `await` for the result
+    ```js
+    let response = await fetch("https://dog.ceo/api/breed/hound/list");
+    console.log(response);
+    > Response {type: 'cors', url: 'https://dog.ceo/api/breed/hound/list', redirected: false, status: 200, ok: true, …}
+    let body = await response.json()
+    > body
+            {message: Array(7), status: 'success'}
+            message: (7) ['afghan', 'basset', 'blood', 'english', 'ibizan', 'plott', 'walker']
+            status: "success"
+            [[Prototype]]: Object
+    ```
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
