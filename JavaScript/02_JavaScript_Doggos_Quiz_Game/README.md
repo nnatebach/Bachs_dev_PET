@@ -211,19 +211,31 @@ while (fiveRandomNumbers.length < 5) {
     ```
     > [!NOTE]
     > In the case of `await`, JS is going to wait for the Promise to be resolved to the value that JS is giving us an IOU **before** it goes on and continues running our program.<br>
-    > Without `await`, JS will give back the *pending* Promise and continue running the rest of the program.
-  - For the Response `body` that says `body: ReadableStream`. We can call the `.json()` method to parse its body as a JSON object. And yet, that gives us another Promise that we can ask JS to `await` for the result
-    ```js
-    let response = await fetch("https://dog.ceo/api/breed/hound/list");
-    console.log(response);
-    > Response {type: 'cors', url: 'https://dog.ceo/api/breed/hound/list', redirected: false, status: 200, ok: true, …}
-    let body = await response.json()
-    > body
-            {message: Array(7), status: 'success'}
-            message: (7) ['afghan', 'basset', 'blood', 'english', 'ibizan', 'plott', 'walker']
-            status: "success"
-            [[Prototype]]: Object
-    ```
+    > Without `await`, JS will give back the *pending* Promise and continue running the rest of the program.<br>
+    > `await` pretends that this *asynchronous* operation is a *synchronous* and we have to wait for it to be done before we keep going on with our code.
+
+    > [!NOTE]
+    > If we don't assign the value of the Promise to any variable, neither do us have any way of pointing at the Promise that `fetch` evaluated to, then JS will show whatever state that the Promise was in when `fetch` evaluated it. Yet, somewhere in the background, the Promise has gone ahead in its lifetime.
+- For the Response `body` that says `body: ReadableStream`. We can call the `.json()` method to parse its body as a JSON object. And yet, that gives us another Promise that we can ask JS to `await` for the result
+  ```js
+  let response = await fetch("https://dog.ceo/api/breed/hound/list");
+  console.log(response);
+  > Response {type: 'cors', url: 'https://dog.ceo/api/breed/hound/list', redirected: false, status: 200, ok: true, …}
+  let body = await response.json()
+  > body
+          {message: Array(7), status: 'success'}
+          message: (7) ['afghan', 'basset', 'blood', 'english', 'ibizan', 'plott', 'walker']
+          status: "success"
+          [[Prototype]]: Object
+  ```
+- Alternative to `await` is `.then()`
+  ```js
+  fetch("https://dog.ceo/api/breed/hound/list").then((value) => console.log(value))
+  > Promise {<pending>}
+  > Response {type: 'cors', url: 'https://dog.ceo/api/breed/hound/list', redirected: false, status: 200, ok: true, …}
+  ```
+  - `.then()` is similar to `await`, yet `await` is less "confusing"
+  - For `.then()` we're going to give it a function (callback), it's going to wait to call it until it's done with the Promise. For `await`, we can just pretend that the Promise is just like a regular function call that's going to produce a value.
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
