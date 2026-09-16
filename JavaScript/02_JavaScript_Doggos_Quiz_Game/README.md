@@ -237,6 +237,171 @@ while (fiveRandomNumbers.length < 5) {
   - `.then()` is similar to `await`, yet `await` is less "confusing"
   - For `.then()` we're going to give it a function (callback), it's going to wait to call it until it's done with the Promise. For `await`, we can just pretend that the Promise is just like a regular function call that's going to produce a value.
 
+### Destructing Objects and Arrays
+
+- Destructuring
+  - a way of declaring multiple variables at once.
+  - extracting the properties from an object and making them variables in our current scope
+- Destructuring Objects
+  - Example:
+    ```js
+    const spices = [
+      { name: "Emma", nickname: "Baby" };
+    ]
+    ```
+    ```js
+    let {name, nickname} = spices[0]
+    ```
+    ```js
+    name
+    "Emma"
+    ```
+    ```js
+    nickname
+    "Baby"
+    ```
+  - Explain:
+    - Take the object at index 0 in the `spices` array
+    - Pull out the value of its `name` property and assign that to a new variable `name`
+      ```js
+      name
+      "Emma"
+      ```
+      `name` is now the val pointing to the value from within that object
+    - Do the same thing for the `nickname` property
+  - The order of the property from the object doesn't matter
+      ```js
+      const spices = [
+        { name: "Emma", nickname: "Baby" };
+      ]
+      ```
+      ```js
+      let { nickname, name } = spices[0]
+      ```
+      ```js
+      nickname
+      "Baby"
+      ```
+      ```js
+      name
+      "Emma"
+      ```
+  - It comes in handy when you have an object with lots of different properties but you only care about a couple of them.
+    - Say we only want to care about the property `nickname` from the object
+      ```js
+      const spices = [
+        { name: "Emma", nickname: "Baby" };
+      ]
+      ```
+      ```js
+      let {nickname} = spices[0]
+      ```
+      ```js
+      nickname
+      "Baby"
+      ```
+      ```js
+      name
+      "" // property "name" is not understood
+      ```
+    - Getting the *title* of the *DOM*
+      ```js
+      let { title } = document // document is an object
+      ```
+      ```js
+      title
+      'Doggo Fetch'
+      ```
+- Destructuring Arrays
+  - The order of the values from the array DOES matter
+    - Example 1:
+      ```js
+      let [one, two, three] = [1,2,3]
+      ```
+      ```js
+      one
+      1
+      ```
+      ```js
+      three
+      3
+      ```
+    - Example 2:
+      ```js
+      let [six, five, four] = [4,5,6]
+      ```
+      ```js
+      six
+      4
+      ```
+      ```js
+      four
+      6
+      ```
+  - *"Skipping"* the unnecessary values with commas ","
+    ```js
+    const [emma, geri] = spices;
+    ```
+    ```js
+    const [,,melB] = spices;
+    ```
+    - Example 1:
+      ```js
+      let [ten, twenty, thirty, forty] = [10,20,30,40]
+      ```
+      ```js
+      ten
+      10
+      ```
+      ```js
+      twenty
+      20
+      ```
+      ```js
+      thirty
+      30
+      ```
+      ```js
+      let [ten, twenty] = [10,20,30,40]
+      ```
+      ```js
+      ten
+      10
+      ```
+      ```js
+      twenty
+      20
+      ```
+    - Example 2:
+      ```js
+      let [,,thirty,] = [10,20,30,40]
+      ```
+      ```js
+      thirty
+      30
+      ```
+- Collecting remaining values using *Spread* `...` operator
+  - *Spread* can be used to *collect* into an array from all of the rest of the values that we don't care about
+    ```js
+    const [babySpice, ...adultSpices] = spices
+    ```
+  - Example:
+    ```js
+    let [un, ...autres] = [1, 2, 3, 4, 5, 6]
+    ```
+    ```js
+    un
+    1
+    ```
+    ```js
+    autres
+    2, 3, 4, 5, 6
+    ```
+    This is handy when you don't want to care about the rest of the array right now, but maybe later
+
+> [!IMPORTANT]
+> Order DOES matter when we're destructuring arrays, but it doesn't matter when we're destructuring objects
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
