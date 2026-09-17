@@ -425,12 +425,48 @@ while (fiveRandomNumbers.length < 5) {
    - Syntax
       - [Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) (as much as you can)
 5. Program
-  ```js
-  function getBreedFromURL(url) {
-    // The string method .split(char) may come in handy
-    // Try to use destructuring as much as you can
-  }
-  ```
+    ```js
+    function getBreedFromURL(url) {
+      // The string method .split(char) may come in handy
+      let unsplitBreed = url.split("/")[4].split("-")
+      // Try to use destructuring as much as you can
+      let [subbreed, breed] = unsplitBreed;
+      return [breed, subbreed].join(" ").trim();
+    }
+    ```
+    Explanations:
+    1. Locating and pulling out the string from the url
+        ```js
+        let unsplitBreed = url.split("/")[4].split("-")
+        ```
+    2. Destructuring the array
+        ```js
+        let [subbreed, breed] = unsplitBreed;
+        ```
+    3. Returning the breed name string as formatted in the breed list.
+      Remove unnecessary character (space) with `trim()` for the case of one word ("beagle")
+        ```js
+        return [breed, subbreed].join(" ").trim();
+        ```
+6. Result
+   1. Two words: "standard poodle"
+      ```js
+      getBreedFromURL("https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg")
+      ```
+      ```js
+      'standard poodle'
+      ```
+   2. One word: "beagle"
+      ```js
+      getBreedFromURL("https://images.dog.ceo/breeds/beagle/n13598_93534.jpg")
+      ```
+      ```js
+      'beagle'
+      ```
+
+> [!NOTE]
+> You should name the variable with something that is related to the operation / method that it is involved.<br>
+> A generic name can cause lots of confusion when you or another developer read the code in the future.
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.

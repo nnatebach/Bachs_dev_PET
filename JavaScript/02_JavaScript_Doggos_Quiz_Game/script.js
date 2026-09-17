@@ -181,9 +181,13 @@ function getMultipleChoices(n, correctAnswer, possibleChoices) {
 // TODO 2
 // Given a URL such as "https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg"
 // return the breed name string as formatted in the breed list, e.g. "standard poodle"
+// example of a one word breed "https://images.dog.ceo/breeds/beagle/n13598_93534.jpg"
 function getBreedFromURL(url) {
   // The string method .split(char) may come in handy
+  let unsplitBreed = url.split("/")[4].split("-")
   // Try to use destructuring as much as you can
+  let [subbreed, breed] = unsplitBreed;
+  return [breed, subbreed].join(" ").trim();
 }
 
 // TODO 3
