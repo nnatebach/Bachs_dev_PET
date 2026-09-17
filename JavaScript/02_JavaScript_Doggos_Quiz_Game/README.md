@@ -239,7 +239,7 @@ while (fiveRandomNumbers.length < 5) {
 
 ### Destructing Objects and Arrays
 
-- Destructuring
+- [Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring)
   - a way of declaring multiple variables at once.
   - extracting the properties from an object and making them variables in our current scope
 - Destructuring Objects
@@ -401,6 +401,36 @@ while (fiveRandomNumbers.length < 5) {
 
 > [!IMPORTANT]
 > Order DOES matter when we're destructuring arrays, but it doesn't matter when we're destructuring objects
+
+### TODO 2
+1. Given
+  A URL such as "https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg"
+2. Requirement
+  return the breed name string as formatted in the breed list, e.g. "standard poodle"
+3. Approach:
+   1. Locate the breed name string from the url
+   2. Make sure the format of the breed name string from the url is exactly the same as from the breed list.<br>
+   In case of
+      - Two words (poodle-standard)
+      - One word (beagle)
+      - Optional (multiple words)
+   3. Remove unnecessary character from the breed name string, if any
+   4. Prioritize destructuring
+4. Methods
+   - String:
+      - [split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+      - [trim](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)
+   - Array:
+      - [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
+   - Syntax
+      - [Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring) (as much as you can)
+5. Program
+  ```js
+  function getBreedFromURL(url) {
+    // The string method .split(char) may come in handy
+    // Try to use destructuring as much as you can
+  }
+  ```
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.

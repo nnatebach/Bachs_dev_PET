@@ -204,3 +204,48 @@ Is it because of the requirements or is it because of the assignment `const bree
       function getUser(): Promise<User>
       ```
       That's the most authoritative way to know.
+
+---
+
+07.
+- Question: What if you use regex for the TODO 2?
+  Given a URL such as "https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg"
+  ```js
+  function getBreedFromURL(url) {
+    // The string method .split(char) may come in handy
+    // Try to use destructuring as much as you can
+  }
+  ```
+- Answer: ...
+
+---
+
+08.
+- Question: Try to `.split()` at different parts of the `url` in TODO 2
+  Given a URL such as "https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg"
+  ```js
+  function getBreedFromURL(url) {
+    // The string method .split(char) may come in handy
+    // Try to use destructuring as much as you can
+  }
+  ```
+- Answer: ...
+
+---
+
+09
+- Question: How about removing unnecessary character (space) based on condition instead of `trim`
+  Given a URL such as "https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg"
+  ```js
+  function getBreedFromURL(url) {
+    // The string method .split(char) may come in handy
+    // Try to use destructuring as much as you can
+  }
+  ```
+- Answer: ...
+
+---
+
+10.
+- Question: Difference between `split` and `...` (*spread*) operator?
+- Answer: ...
