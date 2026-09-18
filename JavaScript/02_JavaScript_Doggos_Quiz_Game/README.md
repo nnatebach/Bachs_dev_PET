@@ -484,6 +484,68 @@ If you use it in a regular function, it will throw an error as that violates JS 
 > [!WARNING]
 > Uncaught SyntaxError: await is only valid in async functions and the top level bodies of modules
 
+### TODO 3
+
+1. Requirements
+   - Given a URL (`https://dog.ceo/api/breed/hound/list`), fetch the resource at that URL,
+   - then parse the response as a JSON object,
+   - finally return the "message" property of its body
+
+2. Program
+    ```js
+    async function fetchMessage(url) { }
+    ```
+
+3. Solution
+    ```js
+    async function fetchMessage(url) {
+      const response = await fetch(url);
+      const body = await response.json();
+      const { message } = body
+      return message;
+    }
+    ```
+    ```js
+    await fetchMessage("https://dog.ceo/api/breed/hound/list")
+    ```
+
+3. The `async` operations approach
+     1. Fetch the data from the url
+        ```js
+        const response = await fetch(url);
+        ```
+     2. Parsing JSON
+        ```js
+        const body = await response.json();
+        ```
+     3. Get the **message** from the **body**
+        > [!TIP] Dev Console
+        > {message: Array(7), status: 'success'}<br>
+        >      message: (7) ['afghan', 'basset', 'blood', 'english', 'ibizan', 'plott', 'walker']<br>
+        >      status: "success"<br>
+        >      [[Prototype]]: Object
+        ```js
+        const [ message ] = body
+        ```
+     4. Return all of the Promise value in an `async` function that we need to `await`
+        ```js
+        async function fetchMessage(url)
+        ```
+
+4. Result
+    ```js
+    (7) ['afghan', 'basset', 'blood', 'english', 'ibizan', 'plott', 'walker']
+    ```
+
+> [!IMPORTANT]
+> Since you're using `await`, you need to declare an `async` function for it.<br>
+> And you need to call it with the `await` keyword.<br>
+> Otherwise it's going to return just a *pending* Promise.
+
+> [!TIP] Optional homework:
+> [What the heck is the event loop anyway? | Philip Roberts | JSConf EU](https://www.youtube.com/watch?v=8aGhZQkoFbQ)<br>
+> [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS/Introducing)
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
