@@ -240,8 +240,8 @@ while (fiveRandomNumbers.length < 5) {
 ### Destructing Objects and Arrays
 
 - [Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring)
-  - a way of declaring multiple variables at once.
-  - extracting the properties from an object and making them variables in our current scope
+  - a way of *declaring* multiple *variables* at once.
+  - *extracting* the *properties* from an object and making them variables in our current scope
 - Destructuring Objects
   - Example:
     ```js
@@ -403,6 +403,7 @@ while (fiveRandomNumbers.length < 5) {
 > Order DOES matter when we're destructuring arrays, but it doesn't matter when we're destructuring objects
 
 ### TODO 2
+
 1. Given
   A URL such as "https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg"
 2. Requirement
@@ -467,6 +468,21 @@ while (fiveRandomNumbers.length < 5) {
 > [!NOTE]
 > You should name the variable with something that is related to the operation / method that it is involved.<br>
 > A generic name can cause lots of confusion when you or another developer read the code in the future.
+
+### Async Functions
+
+`await` only works in an `async` function
+```js
+async function fetchMessage(url) {
+  let response = await fetch(url)
+  return response;
+}
+
+fetchMessage("https://images.dog.ceo/breeds/poodle-standard/n02113799_2280.jpg")
+```
+If you use it in a regular function, it will throw an error as that violates JS "rule"
+> [!WARNING]
+> Uncaught SyntaxError: await is only valid in async functions and the top level bodies of modules
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.

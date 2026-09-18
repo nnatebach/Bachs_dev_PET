@@ -249,3 +249,18 @@ Is it because of the requirements or is it because of the assignment `const bree
 10.
 - Question: Difference between `split` and `...` (*spread*) operator?
 - Answer: ...
+
+---
+
+11.
+- Question: `await` requires an `async` function to work
+  ```js
+  async function fetchMessage (url) {
+    let response = await fetch(url);
+    return response;
+  }
+  ```
+  while `.then` can work in a regular function. Correct?
+- Answer: That's correct!
+  - `await` strictly requires an async wrapper: The `await` keyword pauses the execution of code. JavaScript will throw a SyntaxError if you use it inside a standard, regular function.
+  - `.then()` works anywhere: Because `.then()` is just a standard method called on a Promise object, it can be executed inside regular functions, object constructors, or global scripts without any special keywords.
