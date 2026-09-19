@@ -509,6 +509,10 @@ If you use it in a regular function, it will throw an error as that violates JS 
     await fetchMessage("https://dog.ceo/api/breed/hound/list")
     ```
 
+    > [!NOTE]
+    > A native JavaScript Promise instance is always an object.<br>
+    > A `response` is a Promise in computer language, we parse it with `json()` so we can read it better. `json()` gives us another Promise that we want to wait for the *resolved* Promise, therefore we `await` for `json()` as well.
+
 3. The `async` operations approach
      1. Fetch the data from the url
         ```js
