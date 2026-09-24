@@ -568,3 +568,68 @@ If you use it in a regular function, it will throw an error as that violates JS 
       return [doggoImgUrl, correctBreed, breedChoices];
     }
   ```
+- As we're moving past the "TODO 3" with `fetchMessage` async function
+  - We're moving to the *functional programming* style
+    - We make the functions as *independent* from values in the rest of the program that might be changing over time as possible.
+    - The programming style is often seen in JavaScript frameworks (React)
+  - The function `renderButtons`
+    ```js
+    // Function to add the multiple-choice buttons to the page
+    function renderButtons(choicesArray, correctAnswer) {
+      // Event handler function to compare the clicked button's value to correctAnswer
+      // and add "correct"/"incorrect" classes to the buttons as appropriate
+      function buttonHandler(e) {
+        if (e.target.value === correctAnswer) {
+          e.target.classList.add("correct");
+        } else {
+          e.target.classList.add("incorrect");
+          document
+            .querySelector(`button[value="${correctAnswer}"]`)
+            .classList.add("correct");
+        }
+      }
+
+      const options = document.getElementById("options"); // Container for the multiple-choice buttons
+
+      // TODO 4
+      // For each of the choices in choicesArray,
+      // Create a button element whose name, value, and textContent properties are the value of that choice,
+      // attach a "click" event listener with the buttonHandler function,
+      // and append the button as a child of the options element
+    }
+    ```
+    - *render* is an often used keyword in web dev and JS dev.
+    - We want to compute a bunch of data that we need, then we want to *render* (display) it on the screen, in the webpage, in the browser for the viewer to see.
+  - Comparisons:
+    - In the *Quiz Project*
+      - We computed the data AND rendered it to the elements __at the same__ time.
+      - We have the DOM elements for the buttons
+        ```html
+        <div id="options">
+          <button name="true" value="true" >true</button>
+          <button name="false" value="false" >false</button>
+        </div>
+        ```
+    - In this new program *Doggos Quiz Game*,
+      - We split the work into 2 parts:
+        - Part 1: Data fetch, transformations on the data (turning a string into some other strings, getting a list of choices).<br>
+        Example: `buttonHandler`
+          ```js
+          function buttonHandler(e) {
+            if (e.target.value === correctAnswer) {
+              e.target.classList.add("correct");
+            } else {
+              e.target.classList.add("incorrect");
+              document
+                .querySelector(`button[value="${correctAnswer}"]`)
+                .classList.add("correct");
+            }
+          }
+          ```
+        - Part 2: Displaying the data on the page.
+      - We don't have any DOM elements for the buttons
+        ```html
+        <div id="options">
+        </div>
+        ```
+        Yet we can add them in using JS (we can do whatever we want with JS).
