@@ -550,6 +550,50 @@ If you use it in a regular function, it will throw an error as that violates JS 
 > [What the heck is the event loop anyway? | Philip Roberts | JSConf EU](https://www.youtube.com/watch?v=8aGhZQkoFbQ)<br>
 > [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS/Introducing)
 
+### TODO 4
+
+1. Requirements:
+     - For each of the choices in choicesArray
+     - Create a button element whose name, value, and textContent properties are the value of that choice,
+     - attach a "click" event listener with the buttonHandler function,
+     - and append the button as a child of the options element
+
+2. Purpose of the requirements<br>
+    We have this empty DOM dedicated for the buttons of the Quiz Game
+    ```html
+    <div id="options">
+    </div>
+    ```
+    We want to create the buttons and then append them to that `<div id="options">`
+
+3. Approach
+   1. Create a `button` and capture it to a variable.
+   2. Assign the *name*, *value*, and *textContent* properties of each `choice` to the `button`. We have 3 `choice`, hence we'll have 3 `button`.
+   3. Append the `button` to the `options` container for the multiple-choice buttons
+      ```html
+      <div id="options">
+      </div>
+      ```
+
+4. Solution
+    ```js
+    for (let choice of choicesArray) {
+      const button = document.createElement("button");
+      button.textContent = choice;
+      button.value = choice;
+      button.name = choice;
+      button.addEventListener("click", buttonHandler)
+      options.appendChild(button);
+    }
+    ```
+
+5. Tools
+   - [Document: createElement() method](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
+   - [Node: appendChild() method](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
+
+6. Notes
+...
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.

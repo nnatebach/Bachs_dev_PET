@@ -264,3 +264,15 @@ Is it because of the requirements or is it because of the assignment `const bree
 - Answer: That's correct!
   - `await` strictly requires an async wrapper: The `await` keyword pauses the execution of code. JavaScript will throw a SyntaxError if you use it inside a standard, regular function.
   - `.then()` works anywhere: Because `.then()` is just a standard method called on a Promise object, it can be executed inside regular functions, object constructors, or global scripts without any special keywords.
+
+---
+
+12.
+- Question: Why don't we use `map` but rather `for...of` loop for the _TODO 4_?
+  ```
+  // For each of the choices in choicesArray,
+  // Create a button element whose name, value, and textContent properties are the value of that choice,
+  // attach a "click" event listener with the buttonHandler function,
+  // and append the button as a child of the options element
+  ```
+- Answer: ...
