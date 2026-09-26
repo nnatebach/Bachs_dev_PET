@@ -315,3 +315,46 @@ Is it because of the requirements or is it because of the assignment `const bree
   If you needed all elements to exist in the DOM before running some setup logic — for instance, code that measures layout/positions (`getBoundingClientRect`), or that needs to query siblings mid-construction — you'd want a "create & append everything first" pass before that logic runs. But since event listeners are just attached to the JS object (not dependent on DOM position or sibling elements), and don't execute until later anyway, there's no such dependency here.
 
   So the single combined loop in the original code isn't a shortcut that sacrifices correctness — it's actually the more idiomatic, efficient version of the same result.
+
+---
+
+14.
+- Question: When was `choicesArray` initialized an array?
+  ```js
+  // TODO 4
+  // For each of the choices in choicesArray,
+  // Create a button element whose name, value, and textContent properties are the value of that choice,
+  // attach a "click" event listener with the buttonHandler function,
+  // and append the button as a child of the options element
+  for (let choice of choicesArray) {
+    const button = document.createElement("button");
+    button.textContent = choice;
+    button.value = choice;
+    button.name = choice;
+    button.addEventListener("click", buttonHandler);
+    options.appendChild(button);
+  }
+  ```
+- Answer: It was never initialized an array _by that name_. It's the same array object created once, with `const choices = []`, inside `getMultipleChoices`
+  ```js
+  // TODO 1
+  // Given an array of possible answers, a correct answer value, and a number of choices to get,
+  // return a list of that many choices, including the correct answer and others from the array
+  function getMultipleChoices(n, correctAnswer, possibleChoices) {
+    const choices = []
+    choices.push(correctAnswer)
+    // Use a while loop and the getRandomElement() function
+    while (choices.length < n) {
+      // Add other stuff
+      let candidate = getRandomElement(possibleChoices)
+      // Make sure there are no duplicates in the array
+      if (!choices.includes(candidate)) {
+        choices.push(candidate)
+      }
+    }
+    return shuffleArray(choices)
+  }
+  ```
+  Every step after that — `breedChoices`, the destructured `choices`, and finally `choicesArray` — is just a different variable name pointing at that one original array as it gets passed along the chain.
+  > [!NOTE]
+  > This is a useful thing to notice in JS generally: arrays (and objects) are passed by reference, so renaming a parameter in a function signature never re-creates the data — it just gives a new local label to the same thing in memory.
