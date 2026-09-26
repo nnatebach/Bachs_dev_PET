@@ -591,8 +591,62 @@ If you use it in a regular function, it will throw an error as that violates JS 
    - [Document: createElement() method](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
    - [Node: appendChild() method](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
 
-6. Notes
-...
+6. Explanation on the `renderButtons` program
+      ```js
+      // Function to add the multiple-choice buttons to the page
+      function renderButtons(choicesArray, correctAnswer) {
+        // Event handler function to compare the clicked button's value to correctAnswer
+        // and add "correct"/"incorrect" classes to the buttons as appropriate
+        function buttonHandler(e) {
+          if (e.target.value === correctAnswer) {
+            e.target.classList.add("correct");
+          } else {
+            e.target.classList.add("incorrect");
+            document
+              .querySelector(`button[value="${correctAnswer}"]`)
+              .classList.add("correct");
+          }
+        }
+
+        const options = document.getElementById("options"); // Container for the multiple-choice buttons
+
+        // TODO 4
+        // For each of the choices in choicesArray,
+        // Create a button element whose name, value, and textContent properties are the value of that choice,
+        // attach a "click" event listener with the buttonHandler function,
+        // and append the button as a child of the options element
+        for (let choice of choicesArray) {
+          const button = document.createElement("button");
+          button.textContent = choice;
+          button.value = choice;
+          button.name = choice;
+          button.addEventListener("click", buttonHandler);
+          options.appendChild(button);
+        }
+      }
+    ```
+      **Purpose:** renderButtons builds a set of multiple-choice answer buttons on the page and wires them up to show visual feedback when clicked.
+      **Parameters**
+      - `choicesArray` — a list of possible answers (strings) to display as buttons.
+      - `correctAnswer` — the string that represents the right answer.
+
+      `buttonHandler` __(the click handler)__
+
+      This inner function runs whenever any answer button is clicked. It's defined first but doesn't execute until a click happens later.
+      - e is the click event; e.target is whichever button was actually clicked.
+      - If e.target.value === correctAnswer, that button gets the CSS class "correct" added to it — so you could style .correct green, for example.
+      - Otherwise, two things happen:
+        1. The clicked (wrong) button gets the class "incorrect".
+        2. The code also finds the actual correct button — using document.querySelector with an attribute selector button[value="${correctAnswer}"] — and adds "correct" to it too. This way, even if you pick wrong, you're shown which one was right.
+
+      **The main body**
+
+      - `options` grabs the container element (<div id="options"> or similar) that will hold all the buttons.
+      - The `for...of` loop walks through every string in choicesArray and, for each one:
+        1. Creates a new `<button>` element.
+        2. Sets its textContent (what's visibly displayed), value, and name all to that choice string.
+        3. Attaches the buttonHandler function as a "click" event listener.
+        4. Appends the button into the options container so it actually shows up on the page.
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.

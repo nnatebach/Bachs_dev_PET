@@ -276,3 +276,42 @@ Is it because of the requirements or is it because of the assignment `const bree
   // and append the button as a child of the options element
   ```
 - Answer: ...
+
+---
+
+13.
+- Question: For the `renderButtons`, why don't we create the buttons first with all the properties assigned to them then append them to the options container, and finally attach the button handler to the button?
+- Answer: The ordering in this case actually doesn't matter<br>
+  __The key insight: nothing can be clicked until the function finishes running.__
+
+  JavaScript is single-threaded and synchronous. The `for...of` loop runs start to finish, uninterrupted, before the browser ever gets a chance to process a user's click. So by the time a person could possibly click any button, all buttons already exist, are already in the DOM, and already have their listeners attached — regardless of the order you did those three things in for each individual button.
+
+  That also answers a natural worry: "what if `buttonHandler`'s `querySelector` runs before the correct-answer button has been appended?" It can't — `buttonHandler` only runs on click, which happens well after the entire `renderButtons` call (and the whole loop) has completed.
+
+  __Splitting into three separate passes would work, but costs more__
+
+  You could restructure it as:
+  ```js
+  const buttons = [];
+  for (let choice of choicesArray) {
+    const button = document.createElement("button");
+    button.textContent = button.value = button.name = choice;
+    buttons.push(button);
+  }
+  for (let button of buttons) {
+    options.appendChild(button);
+  }
+  for (let button of buttons) {
+    button.addEventListener("click", buttonHandler);
+  }
+  ```
+  This works identically at runtime. But it:
+  - iterates the array three times instead of once,
+  - requires an intermediate `buttons` array just to keep references around between passes,
+  - is more code for zero behavioral benefit.
+
+  __When would separating phases actually matter?__
+
+  If you needed all elements to exist in the DOM before running some setup logic — for instance, code that measures layout/positions (`getBoundingClientRect`), or that needs to query siblings mid-construction — you'd want a "create & append everything first" pass before that logic runs. But since event listeners are just attached to the JS object (not dependent on DOM position or sibling elements), and don't execute until later anyway, there's no such dependency here.
+
+  So the single combined loop in the original code isn't a shortcut that sacrifices correctness — it's actually the more idiomatic, efficient version of the same result.
