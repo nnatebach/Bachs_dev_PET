@@ -633,20 +633,24 @@ If you use it in a regular function, it will throw an error as that violates JS 
       `buttonHandler` __(the click handler)__
 
       This inner function runs whenever any answer button is clicked. It's defined first but doesn't execute until a click happens later.
-      - e is the click event; e.target is whichever button was actually clicked.
-      - If e.target.value === correctAnswer, that button gets the CSS class "correct" added to it — so you could style .correct green, for example.
+      - `e` is the click event; `e.target` is whichever button was actually clicked.
+      - If `e.target.value === correctAnswer`, that button gets the CSS class `"correct"` added to it — so you could style `.correct` green, for example.
       - Otherwise, two things happen:
-        1. The clicked (wrong) button gets the class "incorrect".
-        2. The code also finds the actual correct button — using document.querySelector with an attribute selector button[value="${correctAnswer}"] — and adds "correct" to it too. This way, even if you pick wrong, you're shown which one was right.
+        1. The clicked (wrong) button gets the class `"incorrect"`.
+        2. The code also finds the actual correct button — using `document.querySelector` with an attribute selector `button[value="${correctAnswer}"]` — and adds `"correct"` to it too. This way, even if you pick wrong, you're shown which one was right.
 
       **The main body**
 
-      - `options` grabs the container element (<div id="options"> or similar) that will hold all the buttons.
-      - The `for...of` loop walks through every string in choicesArray and, for each one:
+      - `options` grabs the container element (`<div id="options">` or similar) that will hold all the buttons.
+      - The `for...of` loop walks through every string in `choicesArray` and, for each one:
         1. Creates a new `<button>` element.
-        2. Sets its textContent (what's visibly displayed), value, and name all to that choice string.
-        3. Attaches the buttonHandler function as a "click" event listener.
-        4. Appends the button into the options container so it actually shows up on the page.
+        2. Sets its `textContent` (what's visibly displayed), `value`, and `name` all to that choice string.
+        3. Attaches the `buttonHandler` function as a `"click"` event listener.
+        4. Appends the button into the `options` container so it actually shows up on the page.
+
+      __Net effect:__ call `renderButtons(["Paris", "London", "Berlin"], "Paris")`, and it renders three buttons. Click "Berlin" and it turns "incorrect" while "Paris" simultaneously turns "correct" — click "Paris" directly and it just turns "correct".
+
+      One subtlety worth knowing: because `value` is used both to identify the answer _and_ in the CSS selector lookup, if a choice string contains a `"` character, the `querySelector` template string would break (invalid selector). Not an issue for typical trivia-style text answers, but worth keeping in mind if choices ever come from unpredictable input.
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
