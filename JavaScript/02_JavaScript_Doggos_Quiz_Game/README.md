@@ -652,6 +652,24 @@ If you use it in a regular function, it will throw an error as that violates JS 
 
       One subtlety worth knowing: because `value` is used both to identify the answer _and_ in the CSS selector lookup, if a choice string contains a `"` character, the `querySelector` template string would break (invalid selector). Not an issue for typical trivia-style text answers, but worth keeping in mind if choices ever come from unpredictable input.
 
+### Render Quiz Exercise
+
+1. Requirements<br>
+TODO 5
+   - Asynchronously call the loadQuizData() function,
+   - Then call renderQuiz() with the returned imageUrl, correctAnswer, and choices
+
+2. Solution
+    ```js
+    (async () => {
+      const [imgUrl, correctAnswer, choices] = await loadQuizData();
+      renderQuiz(imgUrl, correctAnswer, choices);
+    })();
+    ```
+    - Destructuring to get the properties `imgUrl`, `correctAnswer`, `choices` from `loadQuizData`.
+    - You can name the properties however you like, it's an array so the order is what matters.
+    - We call `loadQuizData` and `renderQuiz` in an `async` IIFE anonymous function because `await` is only valid in `async` functions and the top level bodies of modules.
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
