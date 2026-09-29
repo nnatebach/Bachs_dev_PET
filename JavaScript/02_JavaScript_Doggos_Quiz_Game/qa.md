@@ -377,7 +377,7 @@ Is it because of the requirements or is it because of the assignment `const bree
     ```
 - Answer: `await` is only valid in `async` functions and the top level of modules.
   - Her code was written in the top level bodies of modules placed within the HTML file.
-    ```js
+    ```html
     <script type="module">
       ...
       const [imageUrl, correctAnswer, choices] = await loadQuizData();
