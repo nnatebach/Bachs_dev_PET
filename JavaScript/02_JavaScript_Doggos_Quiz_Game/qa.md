@@ -358,3 +358,35 @@ Is it because of the requirements or is it because of the assignment `const bree
   Every step after that — `breedChoices`, the destructured `choices`, and finally `choicesArray` — is just a different variable name pointing at that one original array as it gets passed along the chain.
   > [!NOTE]
   > This is a useful thing to notice in JS generally: arrays (and objects) are passed by reference, so renaming a parameter in a function signature never re-creates the data — it just gives a new local label to the same thing in memory.
+
+---
+
+15.
+- Question: What's the difference in _TODO 5_ beteween the original work by Anjana - [Doggo Fetch](https://anjana.dev/javascript-first-steps/3-doggofetch-finished.html) and yours?
+  - Hers
+    ```js
+    const [imageUrl, correctAnswer, choices] = await loadQuizData();
+    renderQuiz(imageUrl, correctAnswer, choices);
+    ```
+  - Yours
+    ```js
+    (async () => {
+      const [imgUrl, correctAnswer, choices] = await loadQuizData();
+      renderQuiz(imgUrl, correctAnswer, choices);
+    })();
+    ```
+- Answer: `await` is only valid in `async` functions and the top level of modules.
+  - Her code was written in the top level bodies of modules placed within the HTML file.
+    ```js
+    <script type="module">
+      ...
+      const [imageUrl, correctAnswer, choices] = await loadQuizData();
+      renderQuiz(imageUrl, correctAnswer, choices);
+    </script>
+    ```
+  - Mine was written in a separate JS file.
+
+  > [!NOTE]
+  > Learn more:
+  > - [SyntaxError: await is only valid in async functions, async generators and modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Bad_await)
+  > - [Async IIFE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function#async_iife)
