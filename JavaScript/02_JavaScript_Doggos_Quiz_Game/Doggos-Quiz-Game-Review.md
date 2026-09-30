@@ -304,7 +304,7 @@ The 20% that gives you 80% of the understanding is async flow and the two things
 
 __What to ignore for now__
 
-    The shuffle bias, error handling, infinite-loop edge cases, URL shape edge cases, and improvement ideas. None of it blocks Modules.
+The shuffle bias, error handling, infinite-loop edge cases, URL shape edge cases, and improvement ideas. None of it blocks Modules.
 
 __A 20-minute version of the plan__
 
