@@ -359,3 +359,72 @@ __Skip for now__
 - __`getRandomElement`__, __`shuffleArray`__, and __`getMultipleChoices`__: ordinary loops and array logic. You wrote them and they work, and none of them teaches a new concept you'll need for Modules.
 
 If you can explain those four in one sentence each and describe where the program waits (the two `await`s and the image `load` event), you understand what matters and can move on.
+
+## Overall Questions
+
+__The overall flow__
+
+1. What is the order of execution, from the IIFE to the buttons appearing on screen?
+2. Why is the code written bottom-up (helpers first, entry point last) but executed top-down?
+3. What does each function take in and return? Which ones are pure (no side effects) and which touch the page?
+4. Why is `loadQuizData` separate from `renderQuiz`? What's the benefit of separating "getting data" from "showing it"?
+
+__Utility functions__
+
+5. What does `Math.floor(Math.random() * array.length)` produce, and why can it never go out of bounds?
+6. Why does `shuffleArray` say "in-place"? What would happen to the original array?
+7. Why is `sort(() => Math.random() - 0.5)` a poor shuffle? What would be a better one?
+
+__`getMultipleChoices`__
+
+8. Why is the correct answer pushed in first, before the loop?
+9. Why does the loop need `!choices.includes(candidate)`? What happens without it?
+10. Why shuffle at the end? What would the quiz look like if you didn't?
+11. What happens if `n` is larger than the number of unique possible choices? (Hint: think about the loop condition.)
+
+__`getBreedFromURL`__
+
+12. What does `url.split("/")` return for the poodle URL? Why is index `4` the breed part?
+13. What does `.split("-")` do to `"poodle-standard"` versus `"beagle"`?
+14. How does `[subbreed, breed] = unsplitBreed` behave when the array has only one element? What is `breed` then?
+15. Why does `.trim()` matter at the end?
+16. What breaks for a URL with a different structure?
+
+__`fetchMessage`__
+
+17. Why are there two `await`s' worth of waiting (`fetch` and `.json()`)? What does each one give you?
+18. What does an `async` function return, even if you `return message` inside it?
+19. What would `message` be if you removed the first `await`?
+20. What happens if the network fails or the API returns an error?
+
+__`renderButtons`__
+
+21. What does `e.target` refer to inside `buttonHandler`?
+22. How does `buttonHandler` still know `correctAnswer` after `renderButtons` has finished running? (This is closure.)
+23. Why does the incorrect branch use `querySelector` to find the correct button?
+24. What happens if the user clicks several buttons? Does anything stop them?
+25. Why use `createElement` and `appendChild` instead of building an HTML string?
+
+__`renderQuiz`__
+
+26. Why wait for the image's `load` event before adding the buttons?
+27. What does `replaceChildren(image)` do to the "Fetching doggo..." text?
+28. Why is the `src` set before the listener is attached, and could that ever cause a problem? (Think about whether the `load` event can fire before the listener exists.)
+
+__`loadQuizData` and the IIFE__
+
+29. Why does `loadQuizData` return an array, and how does the IIFE unpack it?
+30. What's the purpose of the `(async () => { ... })();` wrapper? What would the alternative look like in a module?
+31. What happens if `loadQuizData` rejects? Where does the error go?
+
+__Bigger-picture questions__
+
+32. If you wanted to add a "Next question" button, which functions would you reuse, and which would you change?
+33. What would you need to change to support 4 choices instead of 3? (This tests whether values are hardcoded.)
+34. What would you add to handle a failed fetch gracefully?
+
+__How to use this list__
+
+Answer aloud or in writing, then verify in the console. Questions you can't answer point to specific concepts to revisit: 17-20 and 29-31 are about promises and async, 21-22 about events and closures, 14 about destructuring.
+
+You're ready for Modules when you can answer most of these without hesitation and can explain the ones you miss after a quick experiment.
