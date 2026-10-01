@@ -685,6 +685,55 @@ The reason is that `await` is only valid in `async` functions and the top level 
 > - [SyntaxError: await is only valid in async functions, async generators and modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Bad_await)
 > - [Async IIFE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function#async_iife)
 
+### Modules
+
+- In a non-module environment, top-level functions and variables become properties of the global object (like window in browsers) and are accessible from other scripts sharing that same global scope.
+  ```html
+  <script src="./script.js"></script>
+  ```
+- Modules help us to split our code up into multiple files.
+  - `export` lets us expose variables from our module's scope to the outside world
+    ```js
+    // myModule.js
+    const veryUsefulFunction = () => "I came from a module";
+    export { veryUsefulFunction };
+    ```
+  - `import` lets us use an exposed variable from another module
+    ```js
+    // otherModule.js
+    import { veryUsefulFunction } from './myModule.js'
+    veryUsefulFunction();
+    ```
+- Modularizing the Doggos Quiz Game
+  - Separating `getRandomElement`, `getMultipleChoices`, `shuffleArray` to __3-utilities.js__ (or whatever file you want to name it with)
+  - Exporting the function, exposing a Module scope function to the global scope
+    ```js
+    // 3-utilities.js
+    export {
+      getMultipleChoices
+    }
+    ```
+  - Importing the function in the file where we want to use it
+    ```js
+    // script.js
+    import { getMultipleChoices } from "./3-utilities.js";
+    ```
+  > [!TIP]
+  > If there are more than one functions, separate them with commas `,`
+  > ```js
+  > export {
+  >   getRandomElement,
+  >   shuffleArray,
+  >   getMultipleChoices
+  > }
+  > ```
+  > <br>
+  > You don't need to `export` and `import` all the functions from the file. Only the one(s) that you will need for the program to run.<br>
+  > Reference: [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+
+  > [!NOTE]
+  > You only put `type="module"` on the entry file, the one the HTML loads directly. Files it imports are pulled in through the import chain.
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.

@@ -360,3 +360,35 @@ Is it because of the requirements or is it because of the assignment `const bree
   > This is a useful thing to notice in JS generally: arrays (and objects) are passed by reference, so renaming a parameter in a function signature never re-creates the data — it just gives a new local label to the same thing in memory.
 
 ---
+
+15.
+- Question: Modules error
+  > [!WARNING]
+  > Uncaught Error: react-modal: No elements were found for selector daily-companion-app.
+  > companion.bundle.js:5
+- Possible answers:
+  - Another project on the same port. If you use Live Server or similar, the tab may be loading a different app (maybe one with a daily-companion-app root element) that you ran earlier on that port. Check the URL and which folder your server is serving.
+  - A browser extension injecting its own scripts. Try an incognito window with extensions disabled and see if the error goes away.
+  - Stale cache or service worker from an earlier project on that origin. A hard refresh (Ctrl/Cmd+Shift+R) or clearing site data in DevTools → Application can fix that.
+
+---
+
+16.
+- Question: Doggos Quiz Game page takes too long to show the content on the page. Why?
+- Reason: Nothing appears until three things happen in sequence:
+  - The dog.ceo API responds.
+  - The full-size image finishes downloading. These images can be large.
+  - Only then does the load event fire and renderButtons run.
+  > So the buttons wait on the image, and a slow connection makes the whole page feel stuck.
+- Possible Solution: Render the buttons as soon as the data arrives and let the image load on its own
+  ```js
+  function renderQuiz(imgUrl, correctAnswer, choices) {
+    const image = document.createElement("img");
+    image.setAttribute("src", imgUrl);
+    const frame = document.getElementById("image-frame");
+
+    frame.replaceChildren(image);          // show the image as it loads
+    renderButtons(choices, correctAnswer); // buttons appear right away
+  }
+  ```
+- Observation: Open the Network tab in DevTools and reload. You'll see whether the API call or the image download is the slow part. If a request fails or hangs, renderQuiz never runs, and the page stays on "Fetching doggo...".
