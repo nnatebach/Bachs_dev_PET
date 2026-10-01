@@ -652,10 +652,9 @@ If you use it in a regular function, it will throw an error as that violates JS 
 
       One subtlety worth knowing: because `value` is used both to identify the answer _and_ in the CSS selector lookup, if a choice string contains a `"` character, the `querySelector` template string would break (invalid selector). Not an issue for typical trivia-style text answers, but worth keeping in mind if choices ever come from unpredictable input.
 
-### Render Quiz Exercise
+### TODO 5 - Render Quiz Exercise
 
-1. Requirements<br>
-TODO 5
+1. Requirements
    - Asynchronously call the loadQuizData() function,
    - Then call renderQuiz() with the returned imageUrl, correctAnswer, and choices
 
