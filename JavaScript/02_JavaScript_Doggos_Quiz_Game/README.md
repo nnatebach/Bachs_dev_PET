@@ -661,14 +661,30 @@ TODO 5
 
 2. Solution
     ```js
-    (async () => {
-      const [imgUrl, correctAnswer, choices] = await loadQuizData();
-      renderQuiz(imgUrl, correctAnswer, choices);
-    })();
+    const [imgUrl, correctAnswer, choices] = await loadQuizData();
+    renderQuiz(imgUrl, correctAnswer, choices);
     ```
     - Destructuring to get the properties `imgUrl`, `correctAnswer`, `choices` from `loadQuizData`.
     - You can name the properties however you like, it's an array so the order is what matters.
-    - We call `loadQuizData` and `renderQuiz` in an `async` IIFE anonymous function because `await` is only valid in `async` functions and the top level bodies of modules.
+    > [!NOTE]
+    > There are two ways of achieving this, either
+    > - Asynchronously call the `loadQuizData()` function then call `renderQuiz()` in an `async` IIFE anonymous function
+    > ```js
+    >     (async () => {
+    >        const [imgUrl, correctAnswer, choices] = await loadQuizData();
+    >        renderQuiz(imgUrl, correctAnswer, choices);
+    >     })();
+    > ```
+    > - Or change the `<script>` tag to `type="module"` in the HTML file which is the same as Anjana's work for [Doggo Fetch](https://anjana.dev/javascript-first-steps/3-doggofetch-finished.html)
+    >    ```html
+    >     <script type="module" src="./script.js"></script>
+    >    ```
+The reason is that `await` is only valid in `async` functions and the top level bodies of modules.
+
+> [!NOTE]
+> Learn more:
+> - [SyntaxError: await is only valid in async functions, async generators and modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Bad_await)
+> - [Async IIFE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/async_function#async_iife)
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.

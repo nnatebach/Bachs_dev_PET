@@ -164,18 +164,18 @@ function shuffleArray(array) {
 // Given an array of possible answers, a correct answer value, and a number of choices to get,
 // return a list of that many choices, including the correct answer and others from the array
 function getMultipleChoices(n, correctAnswer, possibleChoices) {
-  const choices = []
-  choices.push(correctAnswer)
+  const choices = [];
+  choices.push(correctAnswer);
   // Use a while loop and the getRandomElement() function
   while (choices.length < n) {
     // Add other stuff
-    let candidate = getRandomElement(possibleChoices)
+    let candidate = getRandomElement(possibleChoices);
     // Make sure there are no duplicates in the array
     if (!choices.includes(candidate)) {
-      choices.push(candidate)
+      choices.push(candidate);
     }
   }
-  return shuffleArray(choices)
+  return shuffleArray(choices);
 }
 
 // TODO 2
@@ -184,7 +184,7 @@ function getMultipleChoices(n, correctAnswer, possibleChoices) {
 // example of a one word breed "https://images.dog.ceo/breeds/beagle/n13598_93534.jpg"
 function getBreedFromURL(url) {
   // The string method .split(char) may come in handy
-  let unsplitBreed = url.split("/")[4].split("-")
+  let unsplitBreed = url.split("/")[4].split("-");
   // Try to use destructuring as much as you can
   let [subbreed, breed] = unsplitBreed;
   return [breed, subbreed].join(" ").trim();
@@ -260,7 +260,5 @@ async function loadQuizData() {
 // TODO 5
 // Asynchronously call the loadQuizData() function,
 // Then call renderQuiz() with the returned imageUrl, correctAnswer, and choices
-(async () => {
-  const [imgUrl, correctAnswer, choices] = await loadQuizData();
-  renderQuiz(imgUrl, correctAnswer, choices);
-})();
+const [imgUrl, correctAnswer, choices] = await loadQuizData();
+renderQuiz(imgUrl, correctAnswer, choices);
