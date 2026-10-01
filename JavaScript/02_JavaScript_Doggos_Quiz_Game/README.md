@@ -734,6 +734,17 @@ The reason is that `await` is only valid in `async` functions and the top level 
   > [!NOTE]
   > You only put `type="module"` on the entry file, the one the HTML loads directly. Files it imports are pulled in through the import chain.
 
+### Debugging
+
+Useful Console API logging methods: `console.log()` (or `.warn()` or `.error()`)
+```js
+function whyIsntThisWorking(input) {
+  console.log("Well at least we got this far");
+  console.log(input);
+  return thingThatDoesntWork(input);
+}
+```
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
