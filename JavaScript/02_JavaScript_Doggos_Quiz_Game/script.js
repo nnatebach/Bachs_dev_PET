@@ -224,7 +224,7 @@ function renderQuiz(imgUrl, correctAnswer, choices) {
 // Function to load the data needed to display the quiz
 async function loadQuizData() {
   document.getElementById("image-frame").textContent = "Fetching doggo...";
-
+  // debugger; - debugger statement
   const doggoImgUrl = await fetchMessage(RANDOM_IMG_ENDPOINT);
   const correctBreed = getBreedFromURL(doggoImgUrl);
   const breedChoices = getMultipleChoices(3, correctBreed, BREEDS);
