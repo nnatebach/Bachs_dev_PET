@@ -745,6 +745,47 @@ function whyIsntThisWorking(input) {
 }
 ```
 
+### Browser Debugger
+
+- Whenever we reload the page, we can see this text on the page
+
+  > "Fetching doggo..."
+
+  that's because the function `loadQuizData` in the file **script.js** is still running properly.
+
+- There are 2 ways to debug
+  - [debugger;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) statement<br>
+      Put the `debugger;` statement right __above__ whichever line of code in the program that you want to debug.
+      ```js
+      async function loadQuizData() {
+        document.getElementById("image-frame").textContent = "Fetching doggo...";
+        debugger; // debugging fetchMessage
+        const doggoImgUrl = await fetchMessage(RANDOM_IMG_ENDPOINT);
+        ...
+      }
+      ```
+      - Because the code executes from top to bottom, putting it right above ensures the program pauses _before_ `fetchMessage` runs.
+      - This allows you to inspect the `RANDOM_IMG_ENDPOINT` variable to make sure the URL is correct before the network request happens.
+  - Browser [line breakpoint](https://developer.chrome.com/docs/devtools/javascript?hl=en#line-breakpoint): When you've got a specific line of code that you want to pause on.
+    - **Debugger** section: In the __Dev Console__, **Sources** tab, you can see that it is showing where in the code that `debugger` is being used, also which file that code is in.
+        - __Call Stack__: Which function is being called is placed on top of the Stack (`loadQuizData`)
+        - **Scope**: The variables that are in play
+          > [!NOTE]
+          > If there are properties with `<value unavailable>` value then that means that it already knows that there are declared variables but you haven't assigned any value to them yet.
+        - [Step through the code](https://developer.chrome.com/docs/devtools/javascript?hl=en#code-stepping) we can use:
+          - __Step over__ (next function call): JS will do the next thing (in the next line) which is `await` the `fetchMessage` call.
+          - __Step in__(into next function call): Further breakdown into the next function call (`fetchMessage`)
+            > [!NOTE]
+            > __Call Stack__:
+            > - At first `loadQuizData` was at top<br>
+            > - But now it is `fetchMessage` at top, `loadQuizData` is below it (in second place)
+
+  > [!NOTE]
+  > The interface might be different between system and browsers.<br>
+  > Firefox has a dedicated **Debugger** tab.<br>
+  > Google Chrome & Microsoft Edge use the **Sources** tab instead.
+
+
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
 - `BREEDS` is in caps because we don't expect to change that value.
