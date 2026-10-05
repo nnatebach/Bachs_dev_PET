@@ -786,6 +786,27 @@ function whyIsntThisWorking(input) {
   > Firefox has a dedicated **Debugger** tab.<br>
   > Google Chrome & Microsoft Edge use the **Sources** tab instead.
 
+### [try...catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) Error Handling
+
+- There are different scenarios of errors in our program
+  - Sometimes the code will stop running
+  - Sometimes we just want to skip an "optional" error and move on from it
+- And yet, if we want to handle the error differently, we can use [`try...catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) statement for that purpose
+  ```js
+  try {
+    thisMightThrowAnError();
+  } catch (error) {
+    console.error("As if! Error:", error);
+    console.log("Whatever, let's press on anyway");
+  }
+  console.log("still rollin' with the homies");
+  ```
+  - `try` something that might give us an error and stop the code from running. If it works and there's no error => JS will go on with the rest of the code after the `try...catch` block
+    > [!NOTE]
+    > We can also throw an error in JS using [`throw`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw)
+  - Otherwise, the `catch` block will let us decide what we want to do. JS will capture the error (object) and give to us that we can log out the error with `console.error("As if! Error:", error);` with a message or some details. Alternatively, we can also use a fallback value.
+    > [!TIP]
+    > Learn more about [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) objects in JS
 
 ## Notes
 - The current structure of this code base is arbitrary, you can feel free to restructure the code in your own favor, yet we can do that after walking through all the exercises together.
