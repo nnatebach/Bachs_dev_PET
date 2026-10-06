@@ -15,8 +15,8 @@ FrontEnd Masters: From First Steps to Professional
   1. [x] JavaScript Quiz project - Wednesday, February 4th, 2026
   2. [-] JavaScript Doggos Quiz Game - Monday, March 2nd, 2026
 - Rebuild
-  1. [ ] JavaScript Quiz project - Monday, August 10th, 2026 - ...
-  2. [ ] JavaScript Doggos Quiz Game
+  1. [x] JavaScript Quiz project - Monday, August 10th, 2026 - ...
+  2. [x] JavaScript Doggos Quiz Game - Monday, October 5th, 2026
 
 Note: Today is Monday, August 10th, 2026. After quite a long while taking a break away from learning coding in JavaScript, I decided to make a comeback. This is the result of many different factors including life decisions, frustration, personality (possibly).
 
