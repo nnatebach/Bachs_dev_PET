@@ -1,0 +1,436 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>TypeScript First Steps</title>
+
+	<link rel="icon" href="https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css"
+		integrity="sha512-Mjxkx+r7O/OLQeKeIBCQ2yspG1P5muhAtv/J+p2/aPnSenciZWm5Wlnt+NOUNA4SHbnBIE/R2ic0ZBiCXdQNUg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css"
+		integrity="sha512-ITH3NSfntO7uI5n+BnxGNXpzDUoOsmAXuG37UDONLxNYIdc0EBBOOQ1xyc+t9ag9ETSuBXFApx+Rod0uURfDYw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css"
+		integrity="sha512-bfCyfT+5Js2CKjpiF7yCtTcNlNTtcdAIHV8DfGLCQuTfTEHTU9uEvhQ/Ty4zv3IRtkFQu8DKeM2MHGka+K/cxA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/night-owl.min.css" integrity="sha512-i5X6Fdn/ZqvGSqPrdMa3FgcpXM/Nr6YccSKFYT93zljl/HZDEpvBbE5Pxp91eiWGccZLrL/LDQJd7fjTRYsVaA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/a11y-dark.min.css"
+		integrity="sha512-Vj6gPCk8EZlqnoveEyuGyYaWZ1+jyjMPg8g4shwyyNlRQl6d3L9At02ZHQr5K6s5duZl/+YKMnM3/8pDhoUphg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		/* SLIDES (Reveal.js) */
+		.reveal code {
+			color:
+				var(--r-link-color-hover);
+		}
+
+		.accent {
+			color: var(--r-link-color);
+		}
+	</style>
+	<style>
+		/* ICONS (Iconify) */
+		.mdi--arrow-right-bold {
+			display: inline-block;
+			--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M4 15V9h8V4.16L19.84 12L12 19.84V15z'/%3E%3C/svg%3E");
+			background-color: currentColor;
+			-webkit-mask-image: var(--svg);
+			mask-image: var(--svg);
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+			-webkit-mask-size: 100% 100%;
+			mask-size: 100% 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+					## TS: Why, What & How
+
+					<div style="display: flex; justify-content: space-evenly; align-items: center;">
+					<a title="Christopher Williams, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:JavaScript-logo.png">
+						<img width="256" alt="JavaScript-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/256px-JavaScript-logo.png?20120221235433"  style="border-radius: 20px;" />
+					</a>
+					<span 
+						class="mdi--arrow-right-bold" 
+						style="width: 128px; height: 128px;">
+					</span>
+					<a title="™/®Microsoft, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Typescript_logo_2020.svg">
+						<img width="256" alt="Typescript logo 2020" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/256px-Typescript_logo_2020.svg.png?20221110153201" />
+					</a>
+					</div>
+
+					--
+					### Goals
+
+					- Understand the problems TypeScript solves
+					- Install TypeScript locally
+					- Start checking types with `tsc`
+
+				  
+					--
+
+					### Ready?
+
+					# Let's go!
+
+					</textarea>
+			</section>
+
+
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+					## The Errors of our JS Ways
+
+					--
+
+					### Ever run into errors like this?
+					
+					```js
+					"Cannot read 'property' of undefined"
+
+					"Cannot set properties of null"
+
+					"'undefined' is not a function"
+
+					```
+
+
+					--
+
+
+
+					### Or unexpected values?
+
+					<a href="https://bobbyhadz.com/blog/javascript-alert-display-variable" title="From bobbyhadz.com" >
+
+					<img src="https://bobbyhadz.com/images/blog/javascript-alert-display-variable/display-object-without-json-stringify.webp" width="600" />
+
+					</a>
+
+					--
+
+					### Or just complete nonsense...
+
+					<a href="https://www.destroyallsoftware.com/talks/wat" title="Wat: A lightning talk by Gary Bernhardt from CodeMash 2012" target="_blank" >
+				
+					<img src="https://i.kym-cdn.com/photos/images/newsfeed/000/173/580/Wat.jpg" title='"wat" meme of a person on a boat wearing a horse mask holding a cat' />
+
+					<small>"Wat" talk by Gary Bernhardt @ CodeMash 2012</small>
+
+					</a>
+
+					--
+
+					### ...like Non-Alphanumeric JS?!?
+
+
+					This is _valid_ JS (`alert(1)`): 
+
+					
+					```js
+					[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[
+					]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]][([][(![]+[])[+[]]+([![]]+[][[]
+					])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+
+					(!![]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+
+					!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![
+					]+[])[+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]
+					+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[
+					+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!!
+					[]+[])[+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![
+					]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[
+					]+!+[]]+(!![]+[])[+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]]((![]+[])[+!+[]]+(![
+					]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+(!
+					[]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])
+					[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]]+[+!+[]]+(
+					!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[
+					])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]])()
+					```
+
+
+					<small>
+
+					[jsf*ck.com](https://jsfuck.com/) via [Claudia Hernández: 'Javascript in Wonderland', JSConf EU 2017](https://youtu.be/gE9xn-KOp1I?feature=shared&t=831)
+
+					</small>
+
+					
+
+
+					--
+
+					<h3>Types in JavaScript</h3>
+										
+					- <span class='accent'>_Dynamic_</span>: Types determined as code is running, not before 
+					<!-- (so it's hard to prevent user-facing `TypeError`s) -->
+					- <span class='accent'>_Weak_</span>: JS will try to change (_coerce_) an unexpected type of value to a type it can work with
+					
+					<small>Read more on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures">MDN</a></small>
+					
+					--
+
+					### WAT dynamic types!
+
+					```js
+					let number = 3.14159;
+					let string = 'not found';
+
+					number.toFixed(); // 3
+					string.toUpperCase(); // NOT FOUND
+
+					number = 'pi';
+					string = 404;
+
+					number.toFixed(); // TypeError: not a function
+					string.toUpperCase(); // TypeError: not a function
+					```
+
+
+					--
+
+
+					### WAT weak types!
+
+					```js
+					let elevenString = '1' + 1; // '11'
+					let zero = '1' - 1; // 0
+					let emptyString = [] + []; // ''
+					let objectObject = [] + {}; // '[object Object]'
+					```
+
+					--
+
+
+
+					<h3>The evolution of JS</h3>
+
+					when | 1995 | 2025
+					--- | --- | ---
+					what | basic interactivity | basically anything computers can do
+					where | frontend only | frontend, backend, mobile... everywhere
+					who | a handful of web devs | massive teams, millions of devs using open source
+
+
+					--
+
+					What if we could catch problems like this <span class="accent">before</span> our users do?
+
+					What if we could even <span class="accent">avoid writing</span> code that won't run in the first place?
+
+				</textarea>
+
+			</section>
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+				<h2>A new <span class="accent">Type</span> of Script</h2>
+
+				<p>
+				<a title="™/®Microsoft, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Typescript_logo_2020.svg">
+					<img width="256" alt="Typescript logo 2020" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/256px-Typescript_logo_2020.svg.png?20221110153201" />
+				</a>
+				</p>
+
+				<a href="https://www.typescriptlang.org/docs/" target="_blank" title="TS Docs" >
+					<p>typescriptlang.org/docs</p>
+				</a>
+				
+				<a href="https://www.typescriptlang.org/play/" title="TS playground" target="_blank">
+					<p>typescriptlang.org/play</p>
+				</a>
+
+				--
+
+				## What is TypeScript?
+
+				- programming language?
+				- type checker?
+				- JS build tool?
+				- IDE tool?
+
+				--
+
+				![Gif from "Schitt's Creek" of David saying "That's correct"](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGVvYzI4MXdqazNsODUydDQxcDZzYWliaDVseGd6bXYwNmo4cDQ2aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9wXoC8W4JFmREY/giphy.gif)
+
+				--
+
+				### TS as a language
+
+				language | JS | TS
+				--- | --- | ---
+				file ext | `.js` | `.ts`
+				execution | interpreted | compiled to JS
+				syntax | subset of TS | superset of JS
+				types | dynamic, weak | static, strong
+
+				--
+
+				### Interpreted vs. Compiled
+
+				<div style="display: grid; grid-template-columns: 1fr 1fr;">
+
+				![Photo of pianist playing from sheet music](https://images.unsplash.com/photo-1551970353-3960cb854a2b?q=80&w=400&auto=format&fit=shrink&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+				<div>
+
+				<!-- ![Photo of handwritten sheet music with pen](https://images.unsplash.com/photo-1693833256158-3e92c49bd438?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+				![Photo of person preparing to transcribe sheet music](https://plus.unsplash.com/premium_photo-1702320399078-f425948f7968?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fHw%3D) -->
+
+				![Photo of guitarist transcribing sheet music](https://plus.unsplash.com/premium_photo-1726848367163-e16a527ddd84?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D)
+
+
+				</div>
+
+
+
+
+				--
+
+				### TS as a <span class="accent">superset</span> of JS
+
+				--
+
+				<div style="position: relative; width: 80%; height: 0; padding-top: 70.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin: 0px auto; overflow: hidden; border-radius: 8px; will-change: transform;">
+				<iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+					src="https://www.canva.com/design/DAGw8WSALhE/HEtvMHeQnPSFoFT41sQo_w/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+				</iframe>
+				</div>
+
+
+				
+				--
+
+				### TS as tooling
+
+				- <span class="accent">Dev tool</span>: can integrate with IDEs & other tools to provide autocomplete, hints, etc.
+				- <span class="accent">Build tool</span>: can generate JS code for various target platforms/versions
+
+
+				</textarea>
+			</section>
+
+
+
+
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+					## Better <span class="accent">JS</span> with <span class="accent">TS</span>
+
+					[docs/handbook/intro-to-js-ts](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html)
+
+
+					--
+		
+
+					### Exercise time!
+					
+					[`1-javascript/exercise/README.md`](https://github.com/vakila/typescript-first-steps/tree/main/1-javascript/exercise)
+
+
+					```zsh
+					cd 1-javascript/exercise/
+					```
+
+					--
+
+					## Step 1: Install TypeScript
+
+
+					```zsh
+					npm i -g typescript
+					```
+
+					```zsh
+					tsc --version
+					```
+
+					--
+
+					## Step 2: Use TS to typecheck a JS file
+
+
+					```zsh
+					tsc --checkJs --noEmit checkMe.js
+					```
+
+					What errors does TS find? 
+
+					--
+
+
+					```zsh
+					tsc --checkJs --noEmit --strict checkMe.js
+					```
+
+					What errors are reported now?
+
+					--
+
+					## Step 3: Fix the errors
+
+					Edit `checkMe.js` to fix the errors
+
+					Run `tsc` with `--strict` to check your solution
+
+
+
+			</textarea>
+			</section>
+
+
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"
+		integrity="sha512-131e3mIrDAyUD075SVzvIjS0g97uDg0+/qAobDHd++h+lgFi4z88DVOpidm06jpb+0PzK4kcm9w79r6EHV0SkA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"
+		integrity="sha512-nLsCkPS/rdxRVOkxiKnld9KhQ24V/5kRChzSZ3MoFODykbWyBlQRsHLrbpN3J4LabYBnXIp1EnRIo3ifvyiQIg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"
+		integrity="sha512-QAU7Ux8iEB53koLKFCtddfFp0D1+uQWoX3ROnRDLeiE98XHOkMciaup0Spc014jQAuJaqz8VjUZdBqriheI4Lg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"
+		integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- CopyCode plugin for copy button on code samples -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js-copycode@1.0.4/plugin/copycode/copycode.js"></script>
+
+	<script>
+		// Slides powered by revealjs.com
+
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, CopyCode]
+		});
+
+	</script>
+
+</body>
+
+</html>

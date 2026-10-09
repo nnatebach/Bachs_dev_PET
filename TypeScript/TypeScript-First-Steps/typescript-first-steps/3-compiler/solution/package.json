@@ -1,0 +1,17 @@
+{
+  "name": "exercise-3",
+  "version": "0.0.0",
+  "description": "An exercise to get familiar with the TS compiler",
+  "license": "ISC",
+  "author": "Anjana Vakil",
+  "type": "module",
+  "main": "compileMe.js",
+  "scripts": {
+    "test": "vitest",
+    "compile": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

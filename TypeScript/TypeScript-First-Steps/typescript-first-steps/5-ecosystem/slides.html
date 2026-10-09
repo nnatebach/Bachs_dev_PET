@@ -1,0 +1,374 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>TypeScript First Steps</title>
+
+    <link rel="icon" href="https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae" />
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css"
+        integrity="sha512-Mjxkx+r7O/OLQeKeIBCQ2yspG1P5muhAtv/J+p2/aPnSenciZWm5Wlnt+NOUNA4SHbnBIE/R2ic0ZBiCXdQNUg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css"
+        integrity="sha512-ITH3NSfntO7uI5n+BnxGNXpzDUoOsmAXuG37UDONLxNYIdc0EBBOOQ1xyc+t9ag9ETSuBXFApx+Rod0uURfDYw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css"
+        integrity="sha512-bfCyfT+5Js2CKjpiF7yCtTcNlNTtcdAIHV8DfGLCQuTfTEHTU9uEvhQ/Ty4zv3IRtkFQu8DKeM2MHGka+K/cxA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/night-owl.min.css" integrity="sha512-i5X6Fdn/ZqvGSqPrdMa3FgcpXM/Nr6YccSKFYT93zljl/HZDEpvBbE5Pxp91eiWGccZLrL/LDQJd7fjTRYsVaA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/a11y-dark.min.css"
+        integrity="sha512-Vj6gPCk8EZlqnoveEyuGyYaWZ1+jyjMPg8g4shwyyNlRQl6d3L9At02ZHQr5K6s5duZl/+YKMnM3/8pDhoUphg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* SLIDES (Reveal.js) */
+        .reveal code {
+            color:
+                var(--r-link-color-hover);
+        }
+
+        .accent {
+            color: var(--r-link-color);
+        }
+    </style>
+    <style>
+        /* ICONS (Iconify) */
+        .mdi--arrow-right-bold {
+            display: inline-block;
+            --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M4 15V9h8V4.16L19.84 12L12 19.84V15z'/%3E%3C/svg%3E");
+            background-color: currentColor;
+            -webkit-mask-image: var(--svg);
+            mask-image: var(--svg);
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+
+            <section data-markdown data-separator-vertical="\n--\n">
+                <textarea data-template>
+
+                ### Back to the backend!
+
+                ![Tyra Banks 'but then make it fashion' meme with TS logo](https://i.imgflip.com/a49tin.jpg)
+
+                --
+
+                - Install TS in the backend project
+                - Create a `tsconfig.json` that extends from appropriate base(s)
+                - Rename the `.js` files to `.ts`
+                - Enable the `noEmit` option in `tsconfig.json`
+                - Run `tsc`
+                
+
+                --
+
+
+                ![Christopher Walken cowbell meme, but make it types](https://i.imgflip.com/a49u6h.jpg)
+
+
+                --
+
+                ### Types for non-TS deps
+
+
+                [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) FTW!
+
+                Community-maintained, npm-installable type declarations for popular JS packages that don't ship their own
+
+                --
+
+                e.g. to install types for Node:
+
+                ```sh
+                npm i -D @types/node
+                ```
+
+                --
+
+                ### Install all the types!
+
+                ![Clean all the things meme](https://imgflip.com/s/meme/X-All-The-Y.jpg)
+
+                --
+
+                Install missing `@types/` packages for package dependencies
+
+                `npm i -D @types/<packageName>`
+
+                e.g. for `express`: `@types/express`
+
+
+                --
+
+                Define the missing custom types to fix the errors!
+
+                --
+
+                
+                ### Type assertions with `as`
+
+
+                ```ts
+                const maybeAnyElement = document.getElementById('my-button');
+                const iSwearThisBtnExists =  possibleHTMLElement as HTMLButtonElement;
+                ```
+
+                --
+
+                ![Image of Austin Powers with text "I see you're using type assertions" "I too like to live dangerously"](https://i.imgflip.com/a4a0q4.jpg)
+
+
+
+
+                </textarea>
+            </section>
+
+
+            <section data-markdown data-separator-vertical="\n--\n">
+                <textarea data-template>
+
+                ### Sharing types
+
+
+                --
+
+
+                ### Type-only imports in `.ts` files
+
+                ```ts
+                import { actualValue, type JustType } from 'values.ts';
+                ```
+
+                ```ts
+                import type { OneType, AnotherType } from 'types.js'
+                ```
+
+                --
+
+
+                ### Exporting types for reuse
+
+
+                ```ts
+                // bananas.ts
+                export type Banana = 'banana';
+                export type Plantain = 'plantain';
+                ```
+
+                ```ts
+                // apples.ts
+                type Apple = 'pink lady' | 'red delicious';
+                const myApples: Apple[] = [];
+                export { myApples, type Apple };
+                ```
+
+                --
+
+                ```ts
+                // fruits.ts
+                import type { Banana, Plantain } from 'bananas';
+                import { myApples, type Apple } from 'apples';
+
+                const fruit: Banana | Apple = 'banana';
+                ```
+            
+            
+                --
+
+                
+           
+
+                </textarea>
+            </section>
+
+            <section data-markdown data-separator-vertical="\n--\n">
+                <textarea data-template>
+
+                ### Type Safety
+
+                ![Gif of a woman putting on a bicycle helmet with the text "safety first"](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2owZjZ1ZW54cmgzbDRjdWg4YjFybHI2ejNyYmhkNGl0b2JmdXVldSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ppcPOCojxincokmTjp/giphy.webp)
+
+
+
+
+
+                --
+
+                ### "end-to-end type safety"
+
+                ![Gif of Jeff Goldblum blinking rapidly and asking "What does that mean?"](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExemoyZXVzaTAzaGNlZ2pjNXQzcG9kMmp6eGM0bjMwcWQ1anZnM3IzcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BQPdUGNQlvH8GL8oVU/giphy.webp)
+
+                --
+
+                ![Handshake meme labeled "frontend" on one muscly arm, "backend" on the other, and "shared types" on their handshake](https://i.imgflip.com/a4a51w.jpg)
+
+            
+
+                </textarea>
+            </section>
+
+            <section data-markdown data-separator-vertical="\n--\n">
+                <textarea data-template>
+
+                # TS OSS FTW!
+
+                --
+
+                ### Types & Databases
+
+                # [TypeORM](https://typeorm.io/)
+
+                --
+
+
+
+
+
+                ### Data Validation
+                
+                Using TS types
+
+                [zod.dev](https://zod.dev)
+
+                _"TS-first schema validation with static type inference"_
+
+                --
+
+
+                - Provides typed objects to define data schemas
+                - Checks that data has that shape at _runtime_ in JS
+                - Lets TS infer corresponding type(s) at _compile time_
+    
+                --
+                
+                ### Declaring a Schema
+
+                ```ts
+                import { z } from "zod";
+
+                const User = z.object({
+                    username: z.string(),
+                });
+                ```
+
+                --
+
+                ### Validating data
+
+                ```ts
+                // throws an error if the data
+                // doesn't match the schema
+                User.parse({ username: "Ludwig" });
+                ```
+
+                --
+
+                ### Inferring TS type(s)
+
+                ```ts
+                // extract the inferred type
+                type User = z.infer<typeof User>; // { username: string }
+                ```
+
+                --
+
+                
+
+                </textarea>
+            </section>
+            <section data-markdown data-separator-vertical="\n--\n">
+                <textarea data-template>
+
+                ## Type-aware Tests
+
+                [vitest.dev/guide/testing-types](https://vitest.dev/guide/testing-types)
+
+                ```sh
+                npm i -D vitest
+                ```
+
+                --
+
+                ```ts
+                import { expectTypeOf } from 'vitest';
+                import myFn from './myFunction';
+                import MyType from './sharedSchema';
+
+                test('my types work properly', () => {
+                    expectTypeOf(myFn).toBeFunction();
+                    expectTypeOf(myFn).not.toBeAny();
+                    expectTypeOf(myFn).parameter(0).toMatchTypeOf<MyType>(); 
+                });
+
+                ```
+
+                --
+
+                ### Tons of helpful TS libs out there!
+
+                These are just some popular examples
+            
+                Check out [github.com/dzharii/awesome-typescript](https://github.com/dzharii/awesome-typescript)
+
+
+
+
+                </textarea>
+            </section>
+
+
+
+
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"
+        integrity="sha512-131e3mIrDAyUD075SVzvIjS0g97uDg0+/qAobDHd++h+lgFi4z88DVOpidm06jpb+0PzK4kcm9w79r6EHV0SkA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"
+        integrity="sha512-nLsCkPS/rdxRVOkxiKnld9KhQ24V/5kRChzSZ3MoFODykbWyBlQRsHLrbpN3J4LabYBnXIp1EnRIo3ifvyiQIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"
+        integrity="sha512-QAU7Ux8iEB53koLKFCtddfFp0D1+uQWoX3ROnRDLeiE98XHOkMciaup0Spc014jQAuJaqz8VjUZdBqriheI4Lg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"
+        integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- CopyCode plugin for copy button on code samples -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-copycode@1.0.4/plugin/copycode/copycode.js"></script>
+
+    <script>
+        // Slides powered by revealjs.com
+
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, CopyCode]
+        });
+
+    </script>
+
+</body>
+
+</html>

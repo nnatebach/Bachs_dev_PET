@@ -1,0 +1,699 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>TypeScript First Steps</title>
+
+
+	<link rel="icon" href="https://www.typescriptlang.org/favicon-32x32.png?v=8944a05a8b601855de116c8a56d3b3ae" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css"
+		integrity="sha512-Mjxkx+r7O/OLQeKeIBCQ2yspG1P5muhAtv/J+p2/aPnSenciZWm5Wlnt+NOUNA4SHbnBIE/R2ic0ZBiCXdQNUg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css"
+		integrity="sha512-ITH3NSfntO7uI5n+BnxGNXpzDUoOsmAXuG37UDONLxNYIdc0EBBOOQ1xyc+t9ag9ETSuBXFApx+Rod0uURfDYw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css"
+		integrity="sha512-bfCyfT+5Js2CKjpiF7yCtTcNlNTtcdAIHV8DfGLCQuTfTEHTU9uEvhQ/Ty4zv3IRtkFQu8DKeM2MHGka+K/cxA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/night-owl.min.css" integrity="sha512-i5X6Fdn/ZqvGSqPrdMa3FgcpXM/Nr6YccSKFYT93zljl/HZDEpvBbE5Pxp91eiWGccZLrL/LDQJd7fjTRYsVaA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/a11y-dark.min.css"
+		integrity="sha512-Vj6gPCk8EZlqnoveEyuGyYaWZ1+jyjMPg8g4shwyyNlRQl6d3L9At02ZHQr5K6s5duZl/+YKMnM3/8pDhoUphg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		/* SLIDES (Reveal.js) */
+		.reveal code {
+			color:
+				var(--r-link-color-hover);
+		}
+
+		.accent {
+			color: var(--r-link-color);
+		}
+	</style>
+	<style>
+		/* ICONS (Iconify) */
+		.mdi--arrow-right-bold {
+			display: inline-block;
+			--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M4 15V9h8V4.16L19.84 12L12 19.84V15z'/%3E%3C/svg%3E");
+			background-color: currentColor;
+			-webkit-mask-image: var(--svg);
+			mask-image: var(--svg);
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+			-webkit-mask-size: 100% 100%;
+			mask-size: 100% 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+					## Compiling TypeScript
+
+					<div style="display: flex; justify-content: space-evenly; align-items: center;">
+						<a title="™/®Microsoft, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Typescript_logo_2020.svg">
+							<img width="256" alt="Typescript logo 2020" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/256px-Typescript_logo_2020.svg.png?20221110153201" />
+						</a>
+					<span 
+						class="mdi--arrow-right-bold" 
+						style="width: 128px; height: 128px;">
+					</span>
+					<a title="Christopher Williams, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:JavaScript-logo.png">
+						<img width="256" alt="JavaScript-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/256px-JavaScript-logo.png?20120221235433"  style="border-radius: 20px;" />
+					</a>
+					
+					</div>
+
+					--
+					### Goals
+
+					- Understand how TS compiles to JS
+					- Take advantage of the compiler's type inference
+					- Compose types with interfaces & generics
+					- Specify compiler settings with `tsconfig.json`
+
+				  
+					--
+
+					### Ready?
+
+					# Let's go!
+
+
+
+					</textarea>
+			</section>
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+				## TS & JS: BFFs
+
+				<a href="https://imgflip.com/i/a44p69"><img src="https://i.imgflip.com/a44p69.jpg" title="Epic Handshake meme with TS & JS united as JS, via imgflip.com"/></a>
+
+				--
+
+
+
+				<a href="https://imgflip.com/i/a44poi"><img src="https://i.imgflip.com/a44poi.jpg" title="Diagram showing TS as superset of JS with text 'TS turns into JS' and arrows indicating that when we compile TS to JS, the types are removed"/></a>
+
+				--
+
+
+				### Compiling TS to JS
+
+				<div style="text-anchor: middle;">
+
+				`file.ts` 
+				<span 
+				class="mdi--arrow-right-bold" 
+				style="width: 1em; height: 1em;"></span> 
+				<span class='accent' style="font-size: 2em;">`tsc`</span>
+				<span 
+				class="mdi--arrow-right-bold" 
+				style="width: 1em; height: 1em;"></span>
+				`file.js`
+
+				</div>
+
+
+				--
+
+				Earlier, we ran this command: 
+
+				```zsh
+				tsc --checkJs --noEmit --strict checkMe.js
+				```
+
+				What do those all those flags do exactly??
+
+				--
+
+				flag | tells compiler to
+				--- | ---
+				`--checkJs` | look at `.js` files (default: `.ts` only)
+				`--strict` | be more nitpicky
+				`--noEmit`| ???
+
+				--
+
+				### Emitted files
+
+				In the last exercise, we ran: 
+
+				`tsc typeMe.ts`
+
+				This compiled our TS to JS and _emitted_ a new file `typeMe.js`
+				
+				--
+
+				### Inputs & outputs
+
+				option | Inputs | Outputs
+				--- | --- | ---
+				(default) | `.ts` | `.js` 
+				`--checkJs` | `.ts` & `.js` | `.js` 
+				`--noEmit` | `.ts` | nothing!
+
+				
+
+				--
+
+				### Into the JS multiverse
+
+				![Gif of various incarnations of Michelle Yeoh in 'Everything Everwhere All At Once'](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc202cTM2MGVuY3BjZ2Z6dm5yeXRtdHIzNGg3a3Y2NXZjYTNscmNtdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aI2hfQOnxm5mwh9edQ/giphy.gif)
+
+
+				--
+
+				What do you notice about the emitted `typeMe.js`? 
+
+				Try rerunning the command with this flag: 
+
+				```zsh
+				tsc --target es2020 typeMe.ts
+				```
+
+				What do you notice now? 
+
+				--
+
+				### Compiler Targets
+
+
+				`tsc` _targets_ a particular version of JS for its output
+
+				target | compiled code runs in
+				--- | --- 
+				`es5` (default) | older browsers 
+				`es6`/`es2015` | most browsers
+				`esnext` | newest hottest browsers
+
+				--
+
+				### Fine-tuning emitted JS 
+
+				Other options give us even more control what ends up in the emitted JS, for example: 
+
+				```zsh
+				tsc --removeComments typeMe.ts
+				```
+				
+				--
+				
+
+
+				### Compiler Options
+
+				Our collection of `tsc` flags is growing! 
+
+				`--strict`
+
+				`--checkJs`
+
+				`--noEmit`
+
+				`--target <version>`
+
+				`--removeComments`
+
+				--
+
+				![Image from Jaws with text "We're gonna need a bigger command line"](https://i.imgflip.com/a452j8.jpg)
+
+
+				</textarea>
+
+			</section>
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+				## `tsconfig.json`
+
+
+				--
+
+				### Exercise time!
+					
+				[`3-compiler/exercise/README.md`](https://github.com/vakila/typescript-first-steps/tree/main/3-compiler/exercise)
+
+				```zsh
+				cd 3-compiler/exercise/
+				```
+
+				--
+
+
+				### Step 1: Install deps & run tests
+
+				```zsh
+				npm i
+				```
+
+				```zsh
+				npm run test
+				```
+
+				We have some work to do to get these tests passing!
+
+				--
+
+				### Step 2: Setup TypeScript
+
+
+				Install TS as a dev dependency:
+
+				```zsh
+				npm i -D typescript
+				``` 
+
+				--
+
+				Add a `compile` script in `package.json`: 
+
+				```json
+				"scripts": {
+					"test": "vitest",
+					"compile": "tsc"
+				},
+				```
+
+				--
+
+				What happens when you run `npm run compile`?
+
+				--
+
+				### Step 3: Create `tsconfig.json`
+
+				```zsh
+				tsc --init
+				```
+
+				Read through the config file. What do you notice? 
+
+				--
+
+				Now try compiling again: 
+				
+				```zsh
+				npm run compile
+				```
+
+				--
+
+				![Image from Jaws with text "We're gonna need a bigger directory"](https://i.imgflip.com/a45g0q.jpg)
+
+				--
+
+				option | emits | used for e.g.
+				--- | --- | ---
+				`declaration` | `.d.ts` | intellisense
+				`declarationMap` | `.d.ts.map` | 'Go to definition'
+				`sourceMap` | `.js.map` | debugging
+
+				_disable these options if you want!_
+
+
+				</textarea>
+			</section>
+
+
+
+
+
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+					## Fancy types
+
+					![Gif of Iggy Azalea flipping her hair in 'Fancy' video](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExangxdHoxa3N4dWhvcGlpbGFyNGNuM3l2MGliaHh0eThhejllNWhrcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5xtDarIrYGL6LGhg6sg/giphy.gif)
+
+					--
+
+
+
+					### Interfaces
+					
+					```ts
+					interface User {
+						username: string;
+						id: number;
+					}
+
+					const u: User = { username: 'anjana', id: 1}
+					```
+
+					--
+
+					### Extending interfaces
+
+					```ts
+					interface Human extends User {
+						fullname: string;
+					}
+					
+					interface AiAgent extends User {
+						modelName: string;
+					}
+					```
+
+					--
+
+					
+					```ts
+					const batman: Human = { 
+						username: 'batman', id: 2, fullname: 'Bruce Wayne'
+					};
+					const notman: Human = { 
+						username: 'catwoman', id: 1
+					}; // Error!
+
+					const notbot: AiAgent = { modelName: 'sonnet'}; // Error!
+					const yesbot: AiAgent = { 
+						username: 'claude', id: 3, modelName: 'haiku' 
+					}; // OK
+					```
+					
+					
+					
+					--
+
+					### Async code 
+
+					```ts
+					function wave(): string {
+						return ":wave:";
+					}
+					async function asyncWave(): Promise<string> {
+						return ":wave:";
+					}
+					
+					const waveString = wave();
+					const wavePromise = asyncWave();
+					
+					waveString.length;	// 6				
+					wavePromise.length; // Error!
+					```
+
+					--
+					
+					
+
+					### Type parameters
+
+					```ts
+					const promisedNum: Promise<number> = Promise.resolve(5);
+					const promisedStr: Promise<string> = Promise.resolve('5');
+					const brokenPromise: Promise<number> = Promise.resolve(null); // Error!
+					```
+
+					--
+
+						
+					### Generics
+
+
+					```ts
+					type Nullable<T> = T | null;
+
+					let nullishNum: Nullable<number> = 4;
+					nullishNum = 5; // OK
+					nullishNum = null; // OK
+					nullishNum = 'oh no'; // Error!
+					
+					let stringishNull: Nullable<string> = null;
+					stringishNull = 'I exist!'; // Ok
+					stringishNull = 5; // Error!
+					stringishNull = undefined; // Error!
+					```
+
+					--
+
+					### Builtin utility types
+					
+					`Readonly<T>`
+						
+					`Partial<T>`
+
+					`Pick<T>`
+							
+					`Omit<T>`
+
+					...and [many more!](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+								
+
+					--
+
+
+					```ts
+					const editable: User = { username: 'fornow', id: 1 };
+					editable.username; // 'fornow'
+					editable.username = 'nomore' // OK
+
+					const fixed: Readonly<User> = { username: 'forever', id: 2 }
+					fixed.username; // 'forever';
+					fixed.username = 'wontwork'; // Error!
+					```
+
+					--
+
+					```ts
+					const noId: Partial<User> = { username: 'noid' };
+					const noUsername: Partial<User> = { id: 1 };
+					const allOk: Partial<User> = { username: 'ok', id: 2};
+					const noneOk: Partial<User> = {};
+					const notOk: Partial<User> = {invalid: 'property'}; // Error!
+					```
+					--
+
+					```ts
+					const batman: Human = {username: 'batman', id: 2, fullname: 'Bruce Wayne'
+					};
+					const justId: Pick<Human, 'id'> = { id: 3 };
+					const justNames: Pick<Human, 'username' | 'fullname'> = {username: 'catwoman', fullname: 'Selina Kyle' };
+					const wontWork: Pick<Human, 'fullname'> = {fullname: 'Alfred Pennyworth', id: 4};
+					```
+
+					--
+
+					```ts
+					const noUname: Omit<Human, 'username'> = {
+						fullname: 'Alfred Pennyworth', 
+						id: 4
+					};
+					const onlyUname: Omit<Human, 'id' | 'fullname'> = {
+						username: 'butler',
+					};
+					const equivalent: Pick<Human, 'username'> = onlyUname;
+					```
+				
+				</textarea>
+			</section>
+
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+                ### Typechecking in the dev workflow 
+
+                    
+                --
+
+                ```
+                tsc --watch
+                ``` 
+
+                Re-runs compiler when you save edits 
+                
+                (but can get real slow!)
+                
+                --
+
+                
+                ```json
+                "scripts" : {
+                    "test": "tsc --noEmit && vitest",
+                }
+                ```
+
+                If `tsc` fails, `vite build` won't run!
+            
+                    
+                </textarea>
+			</section>
+
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+				### Back to our exercise!
+
+
+				--
+
+				## Update `test` script to check types first
+
+				```json
+				"scripts": {
+					"test": "tsc --noEmit && vitest",
+					"compile": "tsc"
+				},
+				```
+
+				--
+
+				## Step 4: Fix the code!
+
+				Declare the missing types in `compileMe.ts` so that:
+
+				- TS compiles without errors
+				- all tests pass
+
+
+
+				</textarea>
+			</section>
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+
+				### Telling the compiler to hush
+
+				(when you know better)
+
+				!["Dude, that's not helping!" gif](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWIyM2QxZHhrN3d4ZjZ6bnh1ajM4ajd2Z3YyZXN0cGMyNGNzczdsYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l4EpeTPAhjNDEizvy/giphy.gif)
+
+				--
+
+				###  `any`  
+
+				```ts
+				let notHelpful: any = 'whatever';
+
+				notHelpful = 'hello'; 
+				notHelpful = 5;
+
+				notHelpful.toUpperCase();
+				```
+
+				--
+
+				![Gif of Prince singing 'you know i didnt even care'](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHJzc28ydW43aGtocGp2eml0bnhheTlmeWFhYmRlZzFqbnNqZXE3cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7Fg6TIEOoAbah28OOK/giphy.gif)
+
+				
+				--
+
+				### `@ts-ignore`
+
+				```js
+				// @ts-ignore
+				function (anything) {
+					//...
+				}
+				```
+
+				--
+
+
+				![Gif of Joey Badass making a rainbow hand motion with the words "truly don't care"](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGNuYnpzM2s5bDRmM29lajdodjIyN3ZreGNjODl4NmJlcmtxc2pqaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohzdQYqPZHHBBBYu4/giphy.webp)
+
+
+				--
+
+
+				![Gif from South Park of a character saying "We don't take kindly to your types 'round here"](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzczOTV2a29iMW9jaDZzZTdhMGd2eGR0YW8wYXVzcHlmd2hzZGs3dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYsse8JnCBjQMCs/giphy.webp)
+				
+
+				</textarea>
+			</section>
+
+
+
+
+			<section data-markdown data-separator-vertical="\n--\n">
+				<textarea data-template>
+				## We're off and typing!
+
+				![Gif of kitten standing on a laptop keyboard](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExazJpNGZibGxoZXVpbzA3YmVhbWc5cHhnbmQ1bmFpdzBmNHFtb2luaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPnAiaMCws8nOsE/giphy-downsized.gif)
+
+
+				--
+
+
+				We've covered a lot so far: 
+				- TS vs JS
+				- Installing & using `tsc` and `tsx`
+				- Type annotations & aliases
+				- Composing types with Unions, Interfaces, & Generics
+				- Compiling TS to JS with different options
+
+				--
+
+				![Gif of an Iceberg](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmRuM2theDE5aGVkNGZvMzliNmx5YjA3YXFtbnZ5cXlwaWYwdXV5byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9wqSjsoBY7H9kI/giphy.webp)
+
+				--
+
+				### Coming up: 
+
+				- Configuring TS for various use cases
+				- Refining your dev workflow
+				- Exploring the TS ecosystem
+				- Ensuring end-to-end type safety
+
+			
+				</textarea>
+			</section>
+
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"
+		integrity="sha512-131e3mIrDAyUD075SVzvIjS0g97uDg0+/qAobDHd++h+lgFi4z88DVOpidm06jpb+0PzK4kcm9w79r6EHV0SkA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"
+		integrity="sha512-nLsCkPS/rdxRVOkxiKnld9KhQ24V/5kRChzSZ3MoFODykbWyBlQRsHLrbpN3J4LabYBnXIp1EnRIo3ifvyiQIg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"
+		integrity="sha512-QAU7Ux8iEB53koLKFCtddfFp0D1+uQWoX3ROnRDLeiE98XHOkMciaup0Spc014jQAuJaqz8VjUZdBqriheI4Lg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"
+		integrity="sha512-U3fPDUX5bMrn1wnYqjaK44MFA9E6MKS+zPAg9WPAGF5XhReBeDj3FGaA831CjueG+YJxYA3WaO/m33kMIoOs/A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- CopyCode plugin for copy button on code samples -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js-copycode@1.0.4/plugin/copycode/copycode.js"></script>
+
+	<script>
+		// Slides powered by revealjs.com
+
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, CopyCode]
+		});
+
+	</script>
+
+</body>
+
+</html>
