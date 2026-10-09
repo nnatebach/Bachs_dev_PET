@@ -1,3 +1,5 @@
+The project repo is cloned from Vakila's [typescript-first-steps](https://github.com/vakila/typescript-first-steps.git)
+
 ## Course Content
 
 ### 01. Introduction
@@ -6,6 +8,7 @@
 - Weak Type
 - [Type coercion](https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion)
 - Type Swap
+- Dynamic Type: A variable can take on different types throughout its lifetime
 
 > [!CAUTION]
 > Sometimes JavaScript does what it thinks is correct, not what we want, just to get the code to work.
@@ -16,3 +19,6 @@ Fix the loosey-goosey of JavaScript
 > [!NOTE]
 > Reference: [TypeScript Docs](https://www.typescriptlang.org/docs/)<br>
 > Playground: https://www.typescriptlang.org/play/
+
+### 04. TypeScript Syntax - Variables & Functions
+We can annotate the type of variables by the time OR before we assign a value to that variable
