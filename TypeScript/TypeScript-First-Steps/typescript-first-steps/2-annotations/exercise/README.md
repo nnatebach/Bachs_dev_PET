@@ -213,3 +213,108 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
 
 > [!TIP]
 > Check out TypeScript [Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)
+
+## Arrays & Objects
+
+- Typed Arrays
+  - `number` typed array
+    ```ts
+    const digits: number[] = [1,2,3];
+    digits.push(4); // OK
+    digits.push('no go'); // Error!
+    ```
+    > [!CAUTION]
+    > `digits.push('no go'); // Error!`<br>
+    > Argument of type 'string' is not assignable to parameter of type 'number'.
+  - `string` typed array
+    ```ts
+    const letters: string[] = 'hello'.split();
+    letters.push('!'); // OK
+    letters.push(5); // Error!
+    ```
+    > [!CAUTION]
+    > `letters.push('!'); // OK`<br>
+    > Expected 1-2 arguments, but got 0.<br>
+    > `letters.push(5); // Error!`<br>
+    > Argument of type 'number' is not assignable to parameter of type 'string'.
+- Typed Objects
+  ```ts
+  let user: {name: string, id: number};
+  user = {name: 'Anjana', id: 1234};
+  user.name = 'Nanjana'; // OK
+  user.id = 4321; // OK
+  user.name = null; // Error!
+  user.id = '1234'; // Error!
+  user.color = 'blue'; // Error!
+  ```
+    Explanation:
+    - The object `user` has
+      - Property `name` of type `string`
+      - Property `id` of type `number`
+    - Same typed values work just fine
+      ```ts
+      user = {name: 'Anjana', id: 1234};
+      user.name = 'Nanjana'; // OK
+      user.id = 4321; // OK
+      ```
+    - Different typed values do **not** work
+      ```ts
+      user.name = null; // Error!
+      user.id = '1234'; // Error!
+      user.color = 'blue'; // Error!
+      ```
+      > [!CAUTION]
+      > Type `null` is not assignable to type `string`.<br>
+      > Type `string` is not assignable to type *number*.<br>
+      > Property 'color' does not exist on type `{ name: string; id: number; }`.
+
+- Customizing typed objects
+
+  For the `color` property to be usable, you'll need to define it within the `user` object
+  ```ts
+  let user: {name: string, id: number, color: string};
+  ```
+  Then this line will work
+  ```ts
+  user.color = 'blue';
+  ```
+  Yet this line breaks
+  ```ts
+  user = {name: 'Anjana', id: 1234};
+  ```
+  > [!CAUTION]
+  > Property 'color' is missing in type '{ name: string; id: number; }' but required in type '{ name: string; id: number; color: string; }'.
+
+  Solution: Add the missing property `color` and assign a value to it
+  ```ts
+  user = {name: 'Anjana', id: 1234, color: 'blue'};
+  ```
+- Optional properties
+  ```ts
+  let user: {
+    id: number,
+    username: string,
+    fullname?: string,
+  };
+  user = {id: 1, username: 'anjana'}; // OK
+  ```
+  - Fix backwards compatibility
+    - `fullname?: string` tells TypeScript that the property `fullname` might be *undefined*.
+    - The line `user = {id: 1, username: 'anjana'};` would have broken since the property `fullname` is __not__ used.
+      > [!TIP]
+      > The _optional properties_ are useful for maintaining backwards compatibility
+  - Calling a method on an *undefined* property
+    ```ts
+    user.fullname.toUpperCase()
+    ```
+    > [!CAUTION]
+    > `user.fullname` is possibly 'undefined'.
+
+    Since we declared `fullname` as either of `string` or `undefined` type with the `?`
+    ```ts
+    fullname?: string
+    ```
+    We can't assume that `fullname` will always be defined to call any method on it.
+
+    > [!NOTE]
+    > As long as we've added `undefined` as one of the possibilities, the rest of our code has to take that into account.
