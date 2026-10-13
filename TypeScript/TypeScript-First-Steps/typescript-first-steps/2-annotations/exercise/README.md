@@ -289,7 +289,7 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
   ```ts
   user = {name: 'Anjana', id: 1234, color: 'blue'};
   ```
-- Optional properties
+- [Optional properties](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties)
   ```ts
   let user: {
     id: number,
@@ -318,3 +318,64 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
 
     > [!NOTE]
     > As long as we've added `undefined` as one of the possibilities, the rest of our code has to take that into account.
+
+  > [!WARNING]
+  > _optional properties_ and _optional chaining_ are **NOT** the same!
+
+- Union Types
+  - Example 1
+    ```ts
+    let numberOrString: number | string;
+    numberOrString = 4;
+    // OK
+    numberOrString = '4';
+    // OK
+    numberOrString = null; // Error!
+    ```
+    > *numberOrString* can either be of type *number* or *string*
+
+    > [!CAUTION]
+    > `numberOrString = null;` // Error!<br>
+    > Type 'null' is not assignable to type 'string | number'.
+  - Example 2:
+    ```ts
+    let nullishNumber: number | null;
+    nullishNumber = 4;
+    // OK
+    nullishNumber = '4';
+    // Error!
+    nullishNumber = null; // OK
+    ```
+    > [!CAUTION]
+    > `nullishNumber = '4';`<br>
+    > Type 'string' is not assignable to type 'number'.
+    - Variable `nullishNumber` is typed as either `number` or `null`
+    - The way the variable `nullishNumber` is declared is similar to how the variable `fullname` was declared earlier `fullname?: string`.
+  - Example 3: Declare a variable typed "array of number" with `number[]`
+    ```ts
+    let numberOrNumbersOrNull: number | number[] | null
+    numberOrNumbersOrNull = 4;
+    // OK
+    numberOrNumbersOrNull = [4];
+    // Ok!
+    numberOrNumbersOrNull = null; // OK
+    ```
+    > [!NOTE]
+    > `numberOrNumbersOrNull = [4];` works fine
+    > `numberOrNumbersOrNull = ['4'];` breaks, because `['4']` is an array of *string* **not** *number*.
+  - Example 4: Array of mixed types
+    ```ts
+    let numberOrNumbersOrNull: (number | string)[]
+    ```
+    An array with a mix of *number* and *string*<br>
+    You can add as many types as you want
+    ```ts
+    let numberOrNumbersOrNull: (number | string | undefined)[]
+    ```
+    > [!NOTE]
+    > Without the parenthesis, it is **no** longer an array of mixed type<br>
+    > For example, these two variables are **not** of the same type
+    > - `let numberOrNumbersOrNull: (number | string)[]`<br>
+    > => An array of *number* and *string*
+    > - `let numberOrNumbersOrNull: number | string[]`<br>
+    > *numberOrNumbersOrNull* is of typed *number* **or** an array of string.
