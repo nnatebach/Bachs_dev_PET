@@ -379,3 +379,56 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
     > => An array of *number* and *string*
     > - `let numberOrNumbersOrNull: number | string[]`<br>
     > *numberOrNumbersOrNull* is of typed *number* **or** an array of string.
+
+## Type Narrowing, Type Guards and Type Aliases
+  - Type Narrowing
+
+    This can be used with Union types to narrow down which exact side of the Union a value might be so we don't do things like calling properties that don't exist
+    ```ts
+    let elemOrNull: HTMLElement | null;
+    elemOrNull = document.getElementById('might-exist');
+    elemOrNull.addEventListener('click', () => {
+        console.log("will this work?");
+    }); // Error!
+    ```
+  - Type Guards
+    - This can be an _if statement_ or some other times a *ternary*
+    - We want to handle the two different narrower types with _type guards_ when the value is either a *null* or does exist
+      ```ts
+      if (elemOrNull === null) {
+          console.log("not found");
+      } else {
+          elemOrNull.addEventListener('click', () => {
+              console.log("found");
+          })
+      }
+      ```
+      > [!CAUTION]
+      > 'elemOrNull' is possibly 'null'.
+
+      > [!NOTE]
+      > JavaScript would have thrown an error but TypeScript would not.<br>
+      > It read our code and know which branch of the _if statement_ that we're in and which already got eliminated.
+
+    > [!NOTE]
+    > Since _one size does not fit all_, we're going to need to customize our code to create whatever the particular types are that we need.
+
+- Type Aliases
+  - We can create a Type Alias with the keyword `type`
+  - It's the same way how we declare a variable
+
+    ```ts
+    type StringOrNumber = string | number;
+    type LogLevel = 'log' | 'error' | 'warn';
+    type User = {
+        id: number,
+        username: string,
+        fullname?: string,
+    };
+    ```
+    - Type **StringOrNumber** is a *Union* of type *string* or *number*
+    - **LogLevel** is of *Union* with *literal* typed of *strings* *'log'*, *'error'* or *'warn'*
+  - Create an object **user1** with **User** typed
+    ```ts
+    const user1: User = {id: 1, username: 'one', fullname: 4}
+    ```
