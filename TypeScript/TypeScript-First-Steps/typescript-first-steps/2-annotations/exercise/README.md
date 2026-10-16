@@ -432,3 +432,42 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
     ```ts
     const user1: User = {id: 1, username: 'one', fullname: 4}
     ```
+
+## Migrating from JavaScript to TypeScript
+
+- Procedures
+  1. Step 1: Assess the situation
+      ```shell
+      node typeMe.js
+      ```
+      Error:
+      ```shell
+      const count = event.rsvps.length;
+      ```
+      > [!CAUTION]
+      > TypeError: Cannot read properties of undefined (reading 'length')
+  2. Step 2: Migrate to TS & install tsx
+       1. Change filename
+          ```shell
+          mv typeMe.js typeMe.ts
+          ```
+       2. Install *tsx* globally
+          ```shell
+          npm i -g tsx
+          ```
+          > [!NOTE]
+          > *tsx* here is a _utility program_ for running *typescript* program as if it were a JS file<br>
+          > It is not the file extension *.tsx* which we use for React
+
+          > [!TIP]
+          > This is useful especially in those TypeScript projects where they don't use the latest version of Node.
+       3. Run the *ts* file
+          ```shell
+          tsx typeMe.ts
+          ```
+       4. Watch the file
+          ```shell
+          tsx --watch typeMe.ts
+          ```
+          > [!TIP]
+          > The flag `--watch` is useful for when you want to automatically rerun the file to check for whatever change you just did to the program
