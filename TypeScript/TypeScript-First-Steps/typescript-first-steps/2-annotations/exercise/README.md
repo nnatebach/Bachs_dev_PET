@@ -471,3 +471,42 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
           ```
           > [!TIP]
           > The flag `--watch` is useful for when you want to automatically rerun the file to check for whatever change you just did to the program
+
+## Type Annotations Exercise
+- Requirements
+  - variables
+  - function parameters
+  - function return types
+  Create new types with type aliases as needed.
+- Example:
+  ```ts
+  type ManyNumbers = number[];
+
+  const myNumbers: ManyNumbers = [1,2,3,4];
+
+  function sum(numbers: ManyNumbers): number {
+      if (numbers.length === 0) {
+          return 0;
+      } else {
+          return numbers[0] + sum(numbers[1:]);
+      }
+  }
+  sum(myNumbers);
+  ```
+    Explanation
+    - Create a type alias of _array of number_<br>
+    A convention is to use capitals
+      ```ts
+      type ManyNumbers = number[];
+      ```
+    - We can reuse the alias type as many times as we want like a variable for the type
+      - Variable **myNumbers**
+        ```ts
+        const myNumbers: ManyNumbers = [1,2,3,4];
+        ```
+      - The params **numbers** of function **sum**
+        ```ts
+        function sum(numbers: ManyNumbers): number {
+          ...
+        }
+        ```
