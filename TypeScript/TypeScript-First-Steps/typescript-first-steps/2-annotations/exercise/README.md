@@ -510,3 +510,181 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
           ...
         }
         ```
+
+- **typeMe.ts**
+  1. Check what bugs we have
+
+      Command
+      ```ts
+      tsx --watch typeMe.ts
+      ```
+  2. Fix bugs
+       1. Problem 1
+          > [!CAUTION]
+          > _TypeError: Cannot read properties of undefined (reading 'length')_
+          > ```ts
+          > // typeMe.ts:34
+          > const count = event.rsvps.length;
+          > ```
+          ```ts
+          // Should return a string like '5 going' or '0 went'
+          const getEventRsvpCount = (event) = {
+            const count = event.rsvps.length;
+            const { isPast } = getEventDate(event);
+            const text = isPast ? 'went' : 'going';
+            return [count, text].join(' ');
+          }
+          ```
+
+          - Reason: The function **getEventRsvpCount** expects an *event* input<br>
+          However, TypeScript doesn't know what shape the **event** object should be
+          - Solution: Create a type **Event**
+            ```ts
+            type Event = {
+              id: string | number,
+              title: string,
+              date: string,
+              image_url?: string,
+              description?: string,
+              host_id: string | number,
+              rsvps: object[]
+            }
+            ```
+
+            > [!NOTE]
+            > Types _string | number_ and _number | string_ are exactly the same, the order doesn't matter since they're both within the set
+
+          The array of object __events__ will be then of typed *Event[]*
+          ```ts
+          const events: Event[] = [
+            {},
+            {}
+          ]
+          ```
+
+          > [!IMPORTANT]
+          > The _[]_ is there because __events__ is an _array of objects_ of type _Event_, __not__ because of the Event type itself.
+
+          > [!TIP]
+          > The difference between the *optional* `?` and `!` is that `?` is _less emphatic than `!`
+          > Example: `event.rsvps!.length` is _more emphatic_ than `event.rsvps?.length`
+          > On the other hand, the _optional operator_s `?` and `!`, can be altered with the _ternary operator_
+          > Example: `event.rsvps ? event.rsvps.length : 0`
+
+        Since (variable and property) **rsvps** can be either of
+        - typed *undefined*
+        - object[]
+
+        And as being an *object[]*, **rsvps** has the property *user_id* which can either be a *number* or a *string*
+      > We can make it a type alias
+        ```ts
+        type Rsvps = {
+          user_id: number | string
+        }
+        ```
+        Then use it in the Type Alias **Event**
+        ```ts
+        type Event = {
+          ...
+          rsvps?: Rsvps[]
+        }
+        ```
+        **rsvps** is typed **Rsvps[]** because it is an array of object within the **events** array of object
+        ```ts
+        const events: Event[] = [
+          {
+            ...
+            rsvps: [{ user_id: 1 }, { user_id: '5' }, { user_id: 3 }]
+          },
+          {}
+        ]
+        ```
+    - Type alias **id**
+
+      We can make the property **id** of the object typed **Event** to be a type alias
+
+      From this
+      ```ts
+      type Event = {
+        id: string | number,
+        ...
+      }
+      ```
+      To this
+      ```ts
+      type Id = tring | number;
+
+      type Event = {
+        id: Id,
+        ...
+      }
+      ```
+    - Fixing the function **getEventRsvpCount** (by typing the *event* param)
+      ```ts
+      // Should return a string like '5 going' or '0 went'
+      const getEventRsvpCount = (event: Event) => {
+          const count = event.rsvps.length;
+          ...
+      }
+      ```
+      > [!NOTE]
+      > As you hover the mouse over the line `event.rsvps`
+      > VS Code shall hint _'event.rsvps' is possibly 'undefined'._
+
+      > [!WARNING] Terminal
+      > ❌ undefined<br>
+      > ❌ EventExpo 2032 on Thu Apr 01 2032:  going<br>
+      > ❌ undefined<br>
+
+      However, we don't want that to be an *undefined*, therefore we need to change that into a *fallback*
+      - Using `||`(or) operator
+        ```ts
+        const count = event.rsvps.length || 0;
+        ```
+      - Using ternary (type guard concept)
+        ```ts
+        const count = event.rsvps ? event.rsvps.length : 0;
+        ```
+      Terminal:
+      > [!WARNING] Terminal
+      > ❌ undefined<br>
+      > ✅ EventExpo 2032 on Thu Apr 01 2032: 0 going<br>
+      > ❌ undefined<br>
+  3. Try to be even more explicit about the input and output of each program
+       1. Typing function **getEventRsvpCount**
+
+          Change from
+          ```ts
+          const getEventRsvpCount = (event: Event)
+          ```
+          to
+          ```ts
+          const getEventRsvpCount = (event: Event): string
+          ```
+          Since the function _should return a string like '5 going' or '0 went'_
+      1. Set explicit return
+         1. **getEventDetails**
+            > // Should return a string with the event's title, date, and rsvps<br>
+            > // (if the event exists), or the string 'Event not found' (if not)
+
+            We can type the function as
+            ```ts
+            const getEventDetails = (eventId): string => {
+              ...
+            }
+            ```
+            Yet, the Terminal is saying *undefined*, which is not the behavior we want
+            > [!WARNING] Terminal
+            > ❌ undefined<br>
+            > ✅ EventExpo 2032 on Thu Apr 01 2032: 0 going<br>
+            > ❌ undefined<br>
+
+            In this case, the solution is
+            ```js
+            return 'Event not found'
+            ```
+            So even if the program actually returns nothing (*undefined*), it will still return the string _'Event not found'_
+           2. **getEventById**
+              ```js
+              function getEventById (id)
+              ```

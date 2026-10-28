@@ -1,4 +1,20 @@
-const events = [
+type Rsvps = {
+    user_id: string | number
+}
+
+type Id = number | string
+
+type Event = {
+    id: Id,
+    title: string,
+    date: string,
+    image_url?: string,
+    description?: string,
+    host_id: string | number,
+    rsvps?: Rsvps[]
+}
+
+const events: Event[] = [
     {
         id: "1",
         title: "Thanksgiving Potluck",
@@ -12,17 +28,17 @@ const events = [
         title: "EventExpo 2032",
         date: '2032-04-01',
         description: "Discover the future of event planning at EventExpo 2032. Network with industry leaders, explore cutting-edge technologies, and attend inspiring workshops.",
-        host_id: "3"
+        host_id: "3",
     }
 ];
 
 // Should return an event object, or null if not found
-function getEventById(id) {
+function getEventById(id: Id) {
     return events.filter(e => e.id === id)[0];
 }
 
 // Should return an object with dateString & isPast 
-function getEventDate(event) {
+function getEventDate(event: Event) {
     const eventDate = new Date(event.date);
     const dateString = eventDate.toDateString();
     const isPast = eventDate < new Date();
@@ -30,8 +46,8 @@ function getEventDate(event) {
 }
 
 // Should return a string like '5 going' or '0 went'
-const getEventRsvpCount = (event) => {
-    const count = event.rsvps.length;
+const getEventRsvpCount = (event: Event): string => {
+    const count = event.rsvps ? event.rsvps.length : 0;
     const { isPast } = getEventDate(event);
     const text = isPast ? 'went' : 'going';
     return [count, text].join(' ');
@@ -39,13 +55,14 @@ const getEventRsvpCount = (event) => {
 
 // Should return a string with the event's title, date, and rsvps
 // (if the event exists), or the string 'Event not found' (if not)
-const getEventDetails = (eventId) => {
+const getEventDetails = (eventId): string => {
     const event = getEventById(eventId);
     if (event) {
         const { dateString } = getEventDate(event);
         const eventRsvps = getEventRsvpCount(event);
         return `${event.title} on ${dateString}: ${eventRsvps}`;
     };
+    return 'Event not found'
 }
 
 function test() {
