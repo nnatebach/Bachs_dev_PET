@@ -33,8 +33,8 @@ const events: Event[] = [
 ];
 
 // Should return an event object, or null if not found
-function getEventById(id: Id) {
-    return events.filter(e => e.id === id)[0];
+function getEventById(id: Id): Event | null {
+    return events.filter(e => e.id.toString() === id.toString())[0];
 }
 
 // Should return an object with dateString & isPast 
@@ -55,7 +55,7 @@ const getEventRsvpCount = (event: Event): string => {
 
 // Should return a string with the event's title, date, and rsvps
 // (if the event exists), or the string 'Event not found' (if not)
-const getEventDetails = (eventId): string => {
+const getEventDetails = (eventId: Id): string => {
     const event = getEventById(eventId);
     if (event) {
         const { dateString } = getEventDate(event);
