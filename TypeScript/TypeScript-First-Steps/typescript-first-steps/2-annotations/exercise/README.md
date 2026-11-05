@@ -738,3 +738,26 @@ What happens once `tsc` runs without errors? (hint: you'll see a new file!)
       > ✅ Thanksgiving Potluck on Fri Nov 29 2030: 3 going<br>
       > ✅ EventExpo 2032 on Thu Apr 01 2032: 0 going<br>
       > ✅ Event not found<br>
+
+## Compiling TypeScript Files
+
+- **tsc** - TypeScript *Compiler* - is the thing that helps us to types check our codes, __not "tsx"__ the extension.
+- **tsx** - TypeScript *Execute* - runs our code as if it was JavaScript in Node
+- The difference between **tsc** and **tsx**
+  - **tsx** is usually faster for *execution*
+    ```ts
+    tsx --watch typeMe.ts
+    ```
+    - tsx uses *esbuild* under the hood to _transpile TypeScript to JavaScript_ on the fly without running full type-checking.
+      > [!TIP]
+      > This gives you an instant cold start when running scripts or dev servers in Node.js.
+    - The catch (_No Type-Checking_): tsx does not perform type-checking. It strips or transforms the TypeScript syntax so *Node.js* can *execute* it *immediately*, meaning it will happily _run code even if it has severe type errors_.
+  - When **tsc** is different:
+    ```ts
+    tsc --strict typeMe.ts
+    ```
+  	- tsc is built for _type safety and emitting production build files_, whereas tsx is built for fast development execution.
+  	- If you don't want to emit any production build files add the flag `--noEmit`
+      ```ts
+      tsc --strict --noEmit typeMe.ts
+      ```
