@@ -3,26 +3,33 @@ The beginning of this "padre ginos" practice is Friday, November 13th, 2026
 ## React without a build step
 
 - HTML
-```html
+
+  ```html
   <div id="root">not rendered</div>
   ```
+
   **root** will be replaced, if you see _not rendered_ in the page, that means something went wrong.
 
   Load things off of CDM without any build step
+
   ```html
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
   ```
-  Reference: [CDN Links](https://legacy.reactjs.org/docs/cdn-links.html)
-  Why there are two packages?
-  - **react** is the universal interface for React
-  - __react-dom__ the actual rendering layer to the DOM of the browser.
+
+  - Reference: [CDN Links](https://legacy.reactjs.org/docs/cdn-links.html)
+
+  - Why there are two packages?
+    - **react** is the universal interface for React
+    - __react-dom__ the actual rendering layer to the DOM of the browser.
 
 - Terminal
   Running local host server using Node
+
   ```node
   npx serve
   ```
+
   **serve** is service made by Vercel
 
   > Browser shows _not rendered_
