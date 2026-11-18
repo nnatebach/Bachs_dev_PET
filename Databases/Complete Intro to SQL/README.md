@@ -1,6 +1,10 @@
 Today is Tuesday, the 17th of November in 2026
 
 This is the beginning of my learning journey for SQL
+- Course: [Complete Intro to SQL & PostgreSQL](https://master.dev/courses/sql/)
+- References:
+  - Outline: [Complete Intro to SQL](https://sql.holt.courses/)
+  - Git Repo: [complete-intro-to-sql](https://github.com/btholt/complete-intro-to-sql)
 
 > [!NOTE]
 > You do **not** need to take the course __Complete Intro to Databases, v2__ *before* this course (Complete Intro to SQL & PostgreSQL)
