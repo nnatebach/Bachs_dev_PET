@@ -1,0 +1,18 @@
+{
+  "author": {
+    "name": "Brian Holt",
+    "company": "Stripe"
+  },
+  "title": "Complete Intro to SQL",
+  "subtitle": "and PostgreSQL",
+  "frontendMastersLink": "https://holt.fyi/sql",
+  "social": {
+    "linkedin": "btholt",
+    "github": "btholt",
+    "twitter": "holtbt"
+  },
+  "description": "Come learn the basics to querying SQL and managing PostgreSQL with industry expert Brian Holt",
+  "keywords": ["sql", "querying", "data", "Brian Holt", "node.js", "javascript"],
+  "productionBaseUrl": "",
+  "csvPath": "./out/lessons.csv"
+}
