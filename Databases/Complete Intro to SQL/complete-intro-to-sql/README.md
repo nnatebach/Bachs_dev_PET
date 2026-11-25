@@ -139,3 +139,56 @@ The **content** is licensed under CC-BY-NC-4.0.
     > The container is still running as we're just exiting our session with the database
 
   You can check whether the container is still running with `docker ps`
+
+---
+
+## SQL Overview & Creating a Database
+
+- The difference between SQL and Docker?
+  - SQL - Structured Query Language
+  - Docker
+
+- What we are doing? We're interacting with the Postgres database with a client called PSQL
+  - Postgres is a database
+  - PSQL is a client that is sending queries and getting information back
+
+  > [!TIP]
+  > You can have one database but you could have many clients
+  > (You could host one database but everybody else could be querying it with their own PSQLs)
+
+- Checking for the commands
+  - First: Run a bash command inside of the container
+
+    ```shell
+    docker exec -u postgres -it pg psql
+    ```
+
+  - Then at the prompt:
+
+    ```shell
+    postgres=# \?
+    ```
+
+- Tables
+  - Check for existing table
+    - First, as always, run a bash command inside of the container
+
+      ```shell
+      docker exec -u postgres -it pg psql
+      ```
+
+    - Then at the prompt
+
+      ```shell
+      postgres=# \d
+      ```
+
+      If you see this
+
+      ```shell
+      Did not find any relations.
+      ```
+
+      That means there are no existing tables
+
+- A database is like a folder that contains many tables, which you can think of like spreadsheets
